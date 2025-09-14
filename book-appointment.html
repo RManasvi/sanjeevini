@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment - Panchsutra Therapy</title>
+<style>
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0f4f8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .appointment-container {
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    max-width: 450px;
+    width: 100%;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #0ea5a6;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+
+  input, select, textarea, button {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #0ea5a6;
+    box-shadow: 0 0 5px rgba(14,165,166,0.3);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  button.primary {
+    background: #0ea5a6;
+    color: white;
+    font-weight: bold;
+  }
+
+  button.primary:hover {
+    background: #0b8f8f;
+  }
+
+  .success-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #27ae60;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="appointment-container">
+  <h1>Book Your Appointment</h1>
+  <form id="appointmentForm">
+    <div class="form-group">
+      <label for="patientName">Your Name</label>
+      <input type="text" id="patientName" placeholder="Enter your full name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="patientEmail">Email</label>
+      <input type="email" id="patientEmail" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="doctorSelect">Select Doctor</label>
+      <select id="doctorSelect" required>
+        <option value="">-- Choose a Doctor --</option>
+        <option value="Dr. Rajesh Sharma">Dr. Rajesh Sharma (Ayurveda)</option>
+        <option value="Dr. Anjali Mehta">Dr. Anjali Mehta (Yoga Therapy)</option>
+        <option value="Dr. Vikram Singh">Dr. Vikram Singh (Panchakarma)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="appointmentDate">Date</label>
+      <input type="date" id="appointmentDate" required>
+    </div>
+
+    <div class="form-group">
+      <label for="appointmentTime">Time</label>
+      <input type="time" id="appointmentTime" required>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes (optional)</label>
+      <textarea id="notes" placeholder="Any health concerns or questions"></textarea>
+    </div>
+
+    <button type="submit" class="primary">Book Appointment</button>
+  </form>
+
+  <div id="successMessage" class="success-message hidden">
+    ✅ Appointment booked successfully!
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('appointmentForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Collect form data
+      const appointmentData = {
+        name: document.getElementById('patientName').value,
+        email: document.getElementById('patientEmail').value,
+        doctor: document.getElementById('doctorSelect').value,
+        date: document.getElementById('appointmentDate').value,
+        time: document.getElementById('appointmentTime').value,
+        notes: document.getElementById('notes').value,
+      };
+
+      console.log('Appointment Data:', appointmentData);
+
+      // Show success message
+      successMessage.classList.remove('hidden');
+
+      // Clear form
+      form.reset();
+
+      // Hide success message after 5s
+      setTimeout(() => {
+        successMessage.classList.add('hidden');
+      }, 5000);
+    });
+  });
+</script>
+
+</body>
+</html>

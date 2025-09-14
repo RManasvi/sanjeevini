@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - Panchsutra Therapy</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Optional: any additional CSS -->
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                 <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Panchsutra<span class="accent-text">Therapy</span></h2>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#dashboard" class="nav-link" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#doctors" class="nav-link" data-section="doctors">
+                            <span class="nav-icon">👨‍⚕️</span>
+                            <span class="nav-text">Manage Doctors</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#patients" class="nav-link" data-section="patients">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Manage Patients</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#analytics" class="nav-link" data-section="analytics">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reports" class="nav-link" data-section="reports">
+                            <span class="nav-icon">📋</span>
+                            <span class="nav-text">Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-section="settings">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="{{ url_for('static', filename='images/placeholder.svg') }}" alt="...">
+
+                    <div class="user-info">
+                        <span class="user-name">Admin User</span>
+                        <span class="user-role">Administrator</span>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 class="page-title">Admin Dashboard</h1>
+                    <p class="page-subtitle">Manage your therapy center operations</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="notification-btn">
+                            <span class="notification-icon">🔔</span>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="date-time">
+                            <span id="currentDateTime"></span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+    <div class="stat-icon">👨‍⚕️</div>
+    <div class="stat-content">
+        <h3>Total Doctors</h3>
+        <p class="stat-number" id="doctorCount">--</p>
+        <span class="stat-change positive" id="doctorChange">Loading...</span>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon">👥</div>
+    <div class="stat-content">
+        <h3>Total Patients</h3>
+        <p class="stat-number" id="patientCount">--</p>
+        <span class="stat-change positive" id="patientChange">Loading...</span>
+    </div>
+</div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <h3>Appointments Today</h3>
+                            <p class="stat-number">42</p>
+                            <span class="stat-change neutral">Same as yesterday</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>Monthly Revenue</h3>
+                            <p class="stat-number">₹2,45,000</p>
+                            <span class="stat-change positive">+12% from last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Recent Activities</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">👨‍⚕️</div>
+                                <div class="activity-content">
+                                    <p>Dr. Sharma joined the team</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">👥</div>
+                                <div class="activity-content">
+                                    <p>New patient registration: Priya Patel</p>
+                                    <span class="activity-time">4 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📅</div>
+                                <div class="activity-content">
+                                    <p>15 appointments scheduled for tomorrow</p>
+                                    <span class="activity-time">6 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>System Status</h3>
+                        <div class="status-list">
+                            <div class="status-item">
+                                <span class="status-label">Server Status</span>
+                                <span class="status-indicator online">Online</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Database</span>
+                                <span class="status-indicator online">Connected</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Backup</span>
+                                <span class="status-indicator warning">Pending</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Security</span>
+                                <span class="status-indicator online">Secure</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Doctors Management Section -->
+            <section id="doctors" class="content-section">
+                <div class="section-header">
+                    <h2>Manage Doctors</h2>
+                    <button class="btn primary" id="addDoctorBtn">Add New Doctor</button>
+                </div>
+                
+                <div class="table-container">
+                    <div class="table-filters">
+                       <input type="search" id="doctorSearch" placeholder="Search doctors..." class="search-input">
+
+<script>
+document.getElementById("doctorSearch").addEventListener("input", function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#doctorsTableBody tr");
+    
+    rows.forEach(row => {
+        const name = row.querySelector(".user-name").innerText.toLowerCase();
+        const email = row.querySelector(".user-email").innerText.toLowerCase();
+        const specialization = row.cells[1].innerText.toLowerCase();
+
+        if (name.includes(filter) || email.includes(filter) || specialization.includes(filter)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
+});
+</script>
+
+                        <select id="specializationFilter" class="filter-select">
+    <option value="">All Specializations</option>
+    <option value="Ayurveda">Ayurveda</option>
+    <option value="Panchakarma">Panchakarma</option>
+    <option value="Yoga Therapy">Yoga Therapy</option>
+</select>
+
+<script>
+document.getElementById("specializationFilter").addEventListener("change", function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#doctorsTableBody tr");
+
+    rows.forEach(row => {
+        const specialization = row.cells[1].innerText.toLowerCase(); // 2nd cell is specialization
+        if (!filter || specialization === filter) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
+});
+</script>
+
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Specialization</th>
+                                <th>Experience</th>
+                                <th>Patients</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctorsTableBody">
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <img src="/placeholder.svg?height=40&width=40" alt="Dr. Sharma">
+                                        <div>
+                                            <span class="user-name">Dr. Rajesh Sharma</span>
+                                            <span class="user-email">rajesh@panchsutra.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Ayurveda Specialist</td>
+                                <td>15 years</td>
+                                <td>156</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon edit" title="Edit">✏️</button>
+                                        <button class="btn-icon view" title="View">👁️</button>
+                                        <button class="btn-icon delete" title="Delete">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Patients Management Section -->
+<section id="patients" class="content-section">
+    <div class="section-header">
+        <h2>Manage Patients</h2>
+        <button class="btn primary" id="addPatientBtn">Add New Patient</button>
+    </div>
+
+    <!-- Patients Table -->
+    <div class="table-container">
+        <table class="data-table" style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f2f2f2;">
+                    <th>Patient</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Problem</th>
+                    <th>History</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="patientsTableBody"></tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Add/Edit Patient Modal -->
+<div id="addPatientModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+    <div class="modal-content" style="background:white; padding:20px; border-radius:8px; width:400px; position:relative;">
+        <div class="modal-header">
+            <h3 id="patientModalTitle">Add New Patient</h3>
+            <button class="modal-close" style="position:absolute; top:10px; right:10px; border:none; background:none; font-size:18px; cursor:pointer;">&times;</button>
+        </div>
+        <form class="modal-form" id="patientForm" style="display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="patientFullName" placeholder="Full Name" required style="padding:8px;">
+            <input type="email" id="patientEmail" placeholder="Email" required style="padding:8px;">
+            <input type="text" id="patientPhone" placeholder="Phone" required style="padding:8px;">
+            <input type="password" id="patientPassword" placeholder="Password" required style="padding:8px;">
+            <input type="text" id="patientAddress" placeholder="Address" required style="padding:8px;">
+            <input type="text" id="patientProblem" placeholder="Problem" required style="padding:8px;">
+            <input type="text" id="patientHistory" placeholder="History" style="padding:8px;">
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn secondary modal-cancel">Cancel</button>
+                <button type="submit" class="btn primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("addPatientModal");
+    const addBtn = document.getElementById("addPatientBtn");
+    const closeBtn = modal.querySelector(".modal-close");
+    const cancelBtn = modal.querySelector(".modal-cancel");
+    const form = document.getElementById("patientForm");
+    const tbody = document.getElementById("patientsTableBody");
+    const modalTitle = document.getElementById("patientModalTitle");
+
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+    let editIndex = -1;
+
+    function renderPatients() {
+        tbody.innerHTML = "";
+        patients.forEach((p, i) => {
+            tbody.innerHTML += `
+            <tr>
+                <td>${p.fullName}</td>
+                <td>${p.email}</td>
+                <td>${p.phone}</td>
+                <td>${p.address}</td>
+                <td>${p.problem}</td>
+                <td>${p.history}</td>
+                <td>
+                    <div class="action-buttons" style="display:flex; gap:5px;">
+                        <button class="btn-icon view" onclick="viewPatient(${i})">👁️</button>
+                        <button class="btn-icon edit" onclick="editPatient(${i})">✏️</button>
+                        <button class="btn-icon delete" onclick="deletePatient(${i})">🗑️</button>
+                    </div>
+                </td>
+            </tr>`;
+        });
+    }
+
+    addBtn.addEventListener("click", () => {
+        editIndex = -1;
+        modalTitle.innerText = "Add New Patient";
+        form.reset();
+        modal.style.display = "flex";
+    });
+
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    cancelBtn.addEventListener("click", () => modal.style.display = "none");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const patientData = {
+            fullName: document.getElementById("patientFullName").value,
+            email: document.getElementById("patientEmail").value,
+            phone: document.getElementById("patientPhone").value,
+            password: document.getElementById("patientPassword").value,
+            address: document.getElementById("patientAddress").value,
+            problem: document.getElementById("patientProblem").value,
+            history: document.getElementById("patientHistory").value
+        };
+
+        if(editIndex >= 0) patients[editIndex] = patientData;
+        else patients.push(patientData);
+
+        localStorage.setItem("patients", JSON.stringify(patients));
+        renderPatients();
+        modal.style.display = "none";
+    });
+
+    window.deletePatient = (i) => {
+        if(confirm("Delete this patient?")) {
+            patients.splice(i,1);
+            localStorage.setItem("patients", JSON.stringify(patients));
+            renderPatients();
+        }
+    };
+
+    window.editPatient = (i) => {
+        editIndex = i;
+        const p = patients[i];
+        document.getElementById("patientFullName").value = p.fullName;
+        document.getElementById("patientEmail").value = p.email;
+        document.getElementById("patientPhone").value = p.phone;
+        document.getElementById("patientPassword").value = p.password;
+        document.getElementById("patientAddress").value = p.address;
+        document.getElementById("patientProblem").value = p.problem;
+        document.getElementById("patientHistory").value = p.history;
+        modalTitle.innerText = "Edit Patient";
+        modal.style.display = "flex";
+    };
+
+    window.viewPatient = (i) => {
+        const p = patients[i];
+        alert(`Name: ${p.fullName}\nEmail: ${p.email}\nPhone: ${p.phone}\nAddress: ${p.address}\nProblem: ${p.problem}\nHistory: ${p.history}`);
+    };
+
+    renderPatients();
+});
+</script>
+
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="content-section">
+                <div class="section-header">
+                    <h2>Analytics & Reports</h2>
+                    <div class="date-range-picker">
+                        <select class="filter-select">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 3 months</option>
+                            <option value="365">Last year</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <h3>Patient Growth</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="patientGrowthChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Revenue Trends</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="revenueChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Treatment Distribution</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="treatmentChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Doctor Performance</h3>
+                        <div class="performance-list">
+                            <div class="performance-item">
+                                <span class="doctor-name">Dr. Sharma</span>
+                                <div class="performance-bar">
+                                    <div class="performance-fill" style="width: 95%"></div>
+                                </div>
+                                <span class="performance-score">95%</span>
+                            </div>
+                            <div class="performance-item">
+                                <span class="doctor-name">Dr. Patel</span>
+                                <div class="performance-bar">
+                                    <div class="performance-fill" style="width: 88%"></div>
+                                </div>
+                                <span class="performance-score">88%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="section-header">
+                    <h2>System Settings</h2>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>General Settings</h3>
+                        <div class="setting-item">
+                            <label>System Name</label>
+                            <input type="text" value="Panchsutra Therapy Management" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Time Zone</label>
+                            <select class="setting-select">
+                                <option>Asia/Kolkata</option>
+                                <option>UTC</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Security Settings</h3>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                Enable Two-Factor Authentication
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                Auto-logout after inactivity
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Backup & Data</h3>
+                        <div class="setting-item">
+                            <button class="btn secondary">Create Backup</button>
+                            <span class="setting-note">Last backup: 2024-01-15 10:30 AM</span>
+                        </div>
+                        <div class="setting-item">
+                            <button class="btn secondary">Export Data</button>
+                            <span class="setting-note">Export system data as CSV</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Doctor Button -->
+<button id="addDoctorBtn" class="btn primary" style="margin-bottom:10px;">Add New Doctor</button>
+
+<!-- Add Doctor Modal -->
+<div id="addDoctorModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+    <div class="modal-content" style="background:white; padding:20px; border-radius:8px; width:400px; position:relative;">
+        <div class="modal-header">
+            <h3 id="modalTitle">Add New Doctor</h3>
+            <button class="modal-close" style="position:absolute; top:10px; right:10px; border:none; background:none; font-size:18px; cursor:pointer;">&times;</button>
+        </div>
+        <form class="modal-form" id="doctorForm" style="display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="firstName" placeholder="First Name" required style="padding:8px;"/>
+            <input type="text" id="lastName" placeholder="Last Name" required style="padding:8px;"/>
+            <input type="email" id="email" placeholder="Email" required style="padding:8px;"/>
+            <input type="text" id="phone" placeholder="Phone" required style="padding:8px;"/>
+            <input type="password" id="password" placeholder="Password" required style="padding:8px;"/>
+            <select id="specialization" required style="padding:8px;">
+                <option value="">Select Specialization</option>
+                <option value="Ayurveda">Ayurveda</option>
+                <option value="Panchakarma">Panchakarma</option>
+                <option value="Yoga Therapy">Yoga Therapy</option>
+            </select>
+            <input type="text" id="qualification" placeholder="Qualification e.g. BAMS" required style="padding:8px;"/>
+            <input type="number" id="experience" placeholder="Experience (years)" min="0" required style="padding:8px;"/>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn secondary modal-cancel">Cancel</button>
+                <button type="submit" class="btn primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Doctors Table -->
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("addDoctorModal");
+    const addBtn = document.getElementById("addDoctorBtn");
+    const closeBtn = modal.querySelector(".modal-close");
+    const cancelBtn = modal.querySelector(".modal-cancel");
+    const form = document.getElementById("doctorForm");
+    const tbody = document.getElementById("doctorsTableBody");
+    const modalTitle = document.getElementById("modalTitle");
+
+    let doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+    let editIndex = -1;
+
+    function renderDoctors() {
+        tbody.innerHTML = "";
+        doctors.forEach((doc, i) => {
+            tbody.innerHTML += `
+            <tr>
+                <td>
+                    <div class="user-cell" style="display:flex; align-items:center; gap:10px;">
+                        <img src="/placeholder.svg?height=40&width=40" alt="${doc.firstName}" style="width:40px; height:40px; border-radius:50%;">
+                        <div>
+                            <span class="user-name">${doc.firstName} ${doc.lastName}</span><br>
+                            <span class="user-email">${doc.email}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>${doc.specialization}</td>
+                <td>${doc.qualification}</td>
+                <td>${doc.experience} yrs</td>
+                <td><span class="status-badge active" style="padding:2px 6px; background:#28a745; color:white; border-radius:5px;">Active</span></td>
+                <td>
+                    <div class="action-buttons" style="display:flex; gap:5px;">
+                        <button class="btn-icon view" onclick="viewDoctor(${i})">👁️</button>
+                        <button class="btn-icon edit" onclick="editDoctor(${i})">✏️</button>
+                        <button class="btn-icon delete" onclick="deleteDoctor(${i})">🗑️</button>
+                    </div>
+                </td>
+            </tr>`;
+        });
+    }
+
+    addBtn.addEventListener("click", () => {
+        editIndex = -1;
+        modalTitle.innerText = "Add New Doctor";
+        form.reset();
+        modal.style.display = "flex";
+        modal.style.justifyContent = "center";
+        modal.style.alignItems = "center";
+    });
+
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    cancelBtn.addEventListener("click", () => modal.style.display = "none");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const newDoctor = {
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            password: document.getElementById("password").value,
+            specialization: document.getElementById("specialization").value,
+            qualification: document.getElementById("qualification").value,
+            experience: document.getElementById("experience").value
+        };
+
+        if(editIndex>=0) doctors[editIndex] = newDoctor;
+        else doctors.push(newDoctor);
+
+        localStorage.setItem("doctors", JSON.stringify(doctors));
+        renderDoctors();
+        modal.style.display = "none";
+    });
+
+    window.deleteDoctor = (i) => {
+        if(confirm("Delete this doctor?")) {
+            doctors.splice(i,1);
+            localStorage.setItem("doctors", JSON.stringify(doctors));
+            renderDoctors();
+        }
+    };
+
+    window.editDoctor = (i) => {
+        editIndex = i;
+        const d = doctors[i];
+        modalTitle.innerText = "Edit Doctor";
+        document.getElementById("firstName").value=d.firstName;
+        document.getElementById("lastName").value=d.lastName;
+        document.getElementById("email").value=d.email;
+        document.getElementById("phone").value=d.phone;
+        document.getElementById("password").value=d.password;
+        document.getElementById("specialization").value=d.specialization;
+        document.getElementById("qualification").value=d.qualification;
+        document.getElementById("experience").value=d.experience;
+        modal.style.display="flex";
+    };
+
+    window.viewDoctor = (i) => {
+        const d = doctors[i];
+        alert(`Name: ${d.firstName} ${d.lastName}\nEmail: ${d.email}\nPhone: ${d.phone}\nSpecialization: ${d.specialization}\nQualification: ${d.qualification}\nExperience: ${d.experience} yrs`);
+    };
+
+    renderDoctors();
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Logout handler
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+        try {
+            const res = await fetch("http://127.0.0.1:5000/logout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "same-origin"
+            });
+            if (res.ok) {
+                localStorage.removeItem("token");
+                window.location.href = "/login-page";
+            } else alert("Logout failed");
+        } catch (err) {
+            alert("⚠️ Backend not reachable");
+        }
+    });
+
+    // Sidebar nav
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    function activateSection(sectionId) {
+        sections.forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(sectionId);
+        if(target) target.classList.add('active');
+        links.forEach(l => l.parentElement.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+        if(activeLink) activeLink.parentElement.classList.add('active');
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const sectionId = link.dataset.section;
+            activateSection(sectionId);
+            history.pushState(null, '', '#' + sectionId);
+        });
+    });
+
+    if (window.location.hash) {
+        activateSection(window.location.hash.substring(1));
+    } else {
+        activateSection('dashboard');
+    }
+});
+async function loadStats() {
+    try {
+        const res = await fetch("http://127.0.0.1:5000/api/stats");
+        if (!res.ok) throw new Error("Failed to fetch stats");
+
+        const data = await res.json();
+
+        // Update doctors
+        document.getElementById("doctorCount").innerText = data.total_doctors;
+        document.getElementById("doctorChange").innerText =
+            `+${data.new_doctors} this month`;
+
+        // Update patients
+        document.getElementById("patientCount").innerText = data.total_patients;
+        document.getElementById("patientChange").innerText =
+            `+${data.new_patients} this month`;
+    } catch (err) {
+        console.error("Error loading stats:", err);
+    }
+}
+
+// Run on page load
+document.addEventListener("DOMContentLoaded", loadStats);
+async function loadDoctors() {
+    const res = await fetch('/api/doctors');
+    const doctors = await res.json();
+
+    const tbody = document.getElementById('doctorsTableBody');
+    tbody.innerHTML = ''; // clear existing rows
+
+    doctors.forEach(doc => {
+        const row = `
+        <tr>
+            <td>
+                <div class="user-cell">
+                    <img src="/placeholder.svg?height=40&width=40" alt="${doc.firstName}">
+                    <div>
+                        <span class="user-name">Dr. ${doc.firstName} ${doc.lastName}</span>
+                        <span class="user-email">${doc.email}</span>
+                    </div>
+                </div>
+            </td>
+            <td>${doc.specialization}</td>
+            <td>${doc.experience_years} years</td>
+            <td>${doc.patients_checked}</td>
+            <td><span class="status-badge active">Active</span></td>
+            <td>
+                <div class="action-buttons">
+                    <button class="btn-icon edit" onclick="editDoctor(${doc.id})">✏️</button>
+                    <button class="btn-icon view" onclick="viewDoctor(${doc.id})">👁️</button>
+                    <button class="btn-icon delete" onclick="deleteDoctor(${doc.id})">🗑️</button>
+                </div>
+            </td>
+        </tr>`;
+        tbody.innerHTML += row;
+    });
+}
+window.onload = loadDoctors;
+
+
+</script>
+
+</body>
+</html>

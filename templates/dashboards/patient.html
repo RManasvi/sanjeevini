@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Panchsutra Therapy</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/patient.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                 <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Panchsutra<span class="accent-text">Therapy</span></h2>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#dashboard" class="nav-link" data-section="dashboard">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#appointments" class="nav-link" data-section="appointments">
+                            <span class="nav-icon">📅</span>
+                            <span class="nav-text">My Appointments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#progress" class="nav-link" data-section="progress">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">My Progress</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#exercises" class="nav-link" data-section="exercises">
+                            <span class="nav-icon">🧘</span>
+                            <span class="nav-text">Exercises</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#community" class="nav-link" data-section="community">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Community</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#library" class="nav-link" data-section="library">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">E-Library</span>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a href="#ai-assistant" class="nav-link" data-section="ai-assistant">
+                            <span class="nav-icon">🤖</span>
+                            <span class="nav-text">AI Assistant</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a href="#feedback" class="nav-link" data-section="feedback">
+                            <span class="nav-icon">⭐</span>
+                            <span class="nav-text">Feedback</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">                   
+
+                    <div class="user-info">
+                        <span class="user-name">Priya Patel</span>
+                        <span class="user-role">Patient</span>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 class="page-title">Welcome Back, Priya!</h1>
+                    <p class="page-subtitle">Track your wellness journey</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="notification-btn">
+                            <span class="notification-icon">🔔</span>
+                            <span class="notification-badge">2</span>
+                        </button>
+                       <!-- Button -->
+<button class="btn primary" id="bookAppointmentBtn">Book Appointment</button>
+
+<!-- Popup Modal -->
+<div id="appointmentModal" 
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
+  
+  <div style="background:#fff; padding:20px; border-radius:12px; width:90%; max-width:600px; position:relative;">
+    
+    <!-- Close Button -->
+    <span id="closeModal" 
+          style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px; font-weight:bold;">&times;</span>
+    
+    <!-- SheetDB Form Embed -->
+    <div id="formContainer">
+      <script src="https://sheetdb.io/s/f/a9h0ejvb8uhon.js"></script>
+    </div>
+  </div>
+</div>
+
+<!-- Script to Toggle Modal -->
+<script>
+  const modal = document.getElementById("appointmentModal");
+  const openBtn = document.getElementById("bookAppointmentBtn");
+  const closeBtn = document.getElementById("closeModal");
+
+  openBtn.onclick = () => {
+    modal.style.display = "flex"; // Show modal
+  };
+
+  closeBtn.onclick = () => {
+    modal.style.display = "none"; // Hide modal
+  };
+
+  // Close when clicking outside the modal content
+  window.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+</script>
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="welcome-card">
+                    <div class="welcome-content">
+                        <h2>Your Wellness Journey</h2>
+                        <p>You're making great progress with your Stress Relief Therapy. Keep up the excellent work!</p>
+                        <div class="journey-stats">
+                            <div class="journey-stat">
+                                <span class="stat-number">75%</span>
+                                <span class="stat-label">Treatment Progress</span>
+                            </div>
+                            <div class="journey-stat">
+                                <span class="stat-number">28</span>
+                                <span class="stat-label">Days Active</span>
+                            </div>
+                            <div class="journey-stat">
+                                <span class="stat-number">12</span>
+                                <span class="stat-label">Sessions Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-image">
+                        <img src="{{ url_for('static', filename='images/placeholder.svg') }}" alt="Wellness Journey">
+
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Upcoming Appointments</h3>
+                        <div class="appointment-list">
+                            <div class="appointment-item">
+                                <div class="appointment-date">
+                                    <span class="date">22</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="appointment-details">
+                                    <h4>Follow-up Session</h4>
+                                    <p>Dr. Rajesh Sharma</p>
+                                    <span class="appointment-time">10:00 AM</span>
+                                </div>
+                                <button class="btn-small primary">Join</button>
+                            </div>
+                            <div class="appointment-item">
+                                <div class="appointment-date">
+                                    <span class="date">25</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="appointment-details">
+                                    <h4>Progress Review</h4>
+                                    <p>Dr. Rajesh Sharma</p>
+                                    <span class="appointment-time">02:30 PM</span>
+                                </div>
+                                <button class="btn-small secondary">Scheduled</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Today's Activities</h3>
+                        <div class="activity-checklist">
+                            <div class="activity-item completed">
+                                <input type="checkbox" checked disabled>
+                                <span class="activity-text">Morning Meditation (20 min)</span>
+                                <span class="activity-time">Completed at 7:00 AM</span>
+                            </div>
+                            <div class="activity-item">
+                                <input type="checkbox" id="herbal-tea">
+                                <label for="herbal-tea" class="activity-text">Herbal Tea (Evening)</label>
+                                <span class="activity-time">Pending</span>
+                            </div>
+                            <div class="activity-item">
+                                <input type="checkbox" id="breathing-exercise">
+                                <label for="breathing-exercise" class="activity-text">Breathing Exercise (15 min)</label>
+                                <span class="activity-time">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-actions">
+                            <button class="quick-action-btn">
+                                <span class="action-icon">📅</span>
+                                <span class="action-text">Book Appointment</span>
+                            </button>
+                            <button class="quick-action-btn">
+                                <span class="action-icon">💬</span>
+                                <span class="action-text">Message Doctor</span>
+                            </button>
+                            <button class="quick-action-btn">
+                                <span class="action-icon">📊</span>
+                                <span class="action-text">View Progress</span>
+                            </button>
+                            <button class="quick-action-btn">
+                                <span class="action-icon">🤖</span>
+                                <span class="action-text">AI Assistant</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notifications-card">
+                    <h3>Recent Notifications</h3>
+                    <div class="notification-list">
+                        <div class="notification-item">
+                            <div class="notification-icon">📅</div>
+                            <div class="notification-content">
+                                <p>Appointment reminder: Tomorrow at 10:00 AM with Dr. Sharma</p>
+                                <span class="notification-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon">🎯</div>
+                            <div class="notification-content">
+                                <p>Great job! You've completed 75% of your treatment plan</p>
+                                <span class="notification-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments" class="content-section">
+                <div class="section-header">
+                    <h2>My Appointments</h2>
+                    <button class="btn primary" id="newAppointmentBtn">Book New Appointment</button>
+                </div>
+                
+                <div class="appointments-tabs">
+                    <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+                    <button class="tab-btn" data-tab="past">Past</button>
+                    <button class="tab-btn" data-tab="cancelled">Cancelled</button>
+                </div>
+
+                <div class="tab-content active" id="upcoming">
+                    <div class="appointments-list">
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <div class="appointment-date-time">
+                                    <span class="date">Jan 22, 2024</span>
+                                    <span class="time">10:00 AM - 11:00 AM</span>
+                                </div>
+                                <span class="appointment-status confirmed">Confirmed</span>
+                            </div>
+                            <div class="appointment-body">
+                                <div class="doctor-info">
+                                    <!-- <img src="/placeholder.svg?height=50&width=50" alt="Doctor"> -->
+                                    <div>
+                                        <h4>Dr. Rajesh Sharma</h4>
+                                        <p>Ayurveda Specialist</p>
+                                    </div>
+                                </div>
+                                <div class="appointment-type">
+                                    <span class="type-badge">Follow-up Session</span>
+                                    <p>Stress Relief Therapy Progress Review</p>
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn-small primary">Join Video Call</button>
+                                <button class="btn-small secondary">Reschedule</button>
+                                <button class="btn-small danger">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <div class="appointment-date-time">
+                                    <span class="date">Jan 25, 2024</span>
+                                    <span class="time">02:30 PM - 03:30 PM</span>
+                                </div>
+                                <span class="appointment-status scheduled">Scheduled</span>
+                            </div>
+                            <div class="appointment-body">
+                                <div class="doctor-info">
+                                    <!-- <img src="/placeholder.svg?height=50&width=50" alt="Doctor"> -->
+                                    <div>
+                                        <h4>Dr. Rajesh Sharma</h4>
+                                        <p>Ayurveda Specialist</p>
+                                    </div>
+                                </div>
+                                <div class="appointment-type">
+                                    <span class="type-badge">Progress Review</span>
+                                    <p>Monthly Progress Assessment</p>
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn-small secondary">Reschedule</button>
+                                <button class="btn-small danger">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="past">
+                    <div class="appointments-list">
+                        <div class="appointment-card completed">
+                            <div class="appointment-header">
+                                <div class="appointment-date-time">
+                                    <span class="date">Jan 15, 2024</span>
+                                    <span class="time">10:00 AM - 11:00 AM</span>
+                                </div>
+                                <span class="appointment-status completed">Completed</span>
+                            </div>
+                            <div class="appointment-body">
+                                <div class="doctor-info">
+                                    <!-- <img src="/placeholder.svg?height=50&width=50" alt="Doctor"> -->
+                                    <div>
+                                        <h4>Dr. Rajesh Sharma</h4>
+                                        <p>Ayurveda Specialist</p>
+                                    </div>
+                                </div>
+                                <div class="appointment-type">
+                                    <span class="type-badge">Initial Consultation</span>
+                                    <p>Treatment Plan Discussion</p>
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn-small primary">View Summary</button>
+                                <button class="btn-small secondary">Book Follow-up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+      <section id="progress" class="content-section">
+  <div class="section-header">
+    <h2>My Progress</h2>
+    <select class="filter-select" id="progressFilter">
+      <option value="week">This Week</option>
+      <option value="month">This Month</option>
+      <option value="all">All Time</option>
+    </select>
+    <button id="updateBtn" style="margin-left:10px;padding:6px 12px;border:none;background:#4caf50;color:#fff;border-radius:6px;cursor:pointer;">
+      Update Progress
+    </button>
+  </div>
+
+  <div class="progress-overview">
+    <div class="progress-card">
+      <h3>Overall Treatment Progress</h3>
+      <div class="circular-progress">
+        <div class="progress-circle" id="progressCircle" data-progress="75">
+          <span class="progress-text" id="progressText">75%</span>
+        </div>
+      </div>
+      <p id="progressMessage">You're doing great! Keep following your treatment plan.</p>
+    </div>
+
+    <div class="milestones-card">
+      <h3>Milestones Achieved</h3>
+      <div class="milestone-list" id="milestoneList"></div>
+    </div>
+  </div>
+
+  <div class="progress-charts">
+    <div class="chart-card">
+      <h3>Weekly Activity</h3>
+      <div class="activity-chart">
+        <div class="chart-bars" id="activityChart"></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Wellness Metrics</h3>
+      <div class="metrics-list" id="metricsList"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Dummy progress data
+  const progressData = {
+    week: {
+      percent: 75,
+      message: "You're doing great! Keep following your treatment plan.",
+      milestones: [
+        { title: "Initial Assessment Complete", date: "Jan 15, 2024", status: "completed" },
+        { title: "First Month of Treatment", date: "Jan 20, 2024", status: "completed" },
+        { title: "Mid-Treatment Review", date: "In progress - 75% complete", status: "current" },
+        { title: "Treatment Completion", date: "Expected by Mar 15, 2024", status: "pending" }
+      ],
+      activity: [80, 90, 70, 85, 95, 60, 75], // % for Mon-Sun
+      metrics: [
+        { label: "Stress Level", value: 30, status: "low", text: "Low" },
+        { label: "Energy Level", value: 85, status: "high", text: "High" },
+        { label: "Sleep Quality", value: 75, status: "good", text: "Good" }
+      ]
+    }
+  };
+
+  // Elements
+  const progressText = document.getElementById("progressText");
+  const progressCircle = document.getElementById("progressCircle");
+  const progressMessage = document.getElementById("progressMessage");
+  const milestoneList = document.getElementById("milestoneList");
+  const activityChart = document.getElementById("activityChart");
+  const metricsList = document.getElementById("metricsList");
+  const updateBtn = document.getElementById("updateBtn");
+
+  function renderProgress(data) {
+    // Progress Circle
+    progressText.textContent = data.percent + "%";
+    progressCircle.style.background = `conic-gradient(#4caf50 ${data.percent * 3.6}deg, #ddd 0deg)`;
+
+    // Message
+    progressMessage.textContent = data.message;
+
+    // Milestones
+    milestoneList.innerHTML = "";
+    data.milestones.forEach(m => {
+      milestoneList.innerHTML += `
+        <div class="milestone-item ${m.status}">
+          <div class="milestone-icon">${
+            m.status === "completed" ? "✅" : m.status === "current" ? "🎯" : "⏳"
+          }</div>
+          <div class="milestone-content">
+            <h4>${m.title}</h4>
+            <p>${m.date}</p>
+          </div>
+        </div>
+      `;
+    });
+
+    // Weekly Activity
+    const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    activityChart.innerHTML = "";
+    data.activity.forEach((val, i) => {
+      activityChart.innerHTML += `
+        <div class="bar" style="height:${val}%"><span>${days[i]}</span></div>
+      `;
+    });
+
+    // Metrics
+    metricsList.innerHTML = "";
+    data.metrics.forEach(m => {
+      metricsList.innerHTML += `
+        <div class="metric-item">
+          <span class="metric-label">${m.label}</span>
+          <div class="metric-bar">
+            <div class="metric-fill ${m.status}" style="width:${m.value}%"></div>
+          </div>
+          <span class="metric-value">${m.text}</span>
+        </div>
+      `;
+    });
+  }
+
+  // Initial render
+  renderProgress(progressData.week);
+
+  // Dropdown filter change
+  document.getElementById("progressFilter").addEventListener("change", e => {
+    const val = e.target.value;
+    renderProgress(progressData[val] || progressData.week);
+  });
+
+  // Update button → random progress value change
+  updateBtn.addEventListener("click", () => {
+    const newPercent = Math.floor(Math.random() * 70) + 30; // 30% - 100%
+    progressData.week.percent = newPercent;
+    progressData.week.message = newPercent >= 90 
+      ? "Fantastic! You're almost there!" 
+      : newPercent >= 60 
+        ? "Good job! Keep it up." 
+        : "You're improving, stay consistent!";
+    renderProgress(progressData.week);
+  });
+</script>
+            <!-- Exercises Section -->
+            <section id="exercises" class="content-section">
+                <div class="section-header">
+                    <h2>My Exercises</h2>
+                    <div class="exercise-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="meditation">Meditation</button>
+                        <button class="filter-btn" data-filter="yoga">Yoga</button>
+                        <button class="filter-btn" data-filter="breathing">Breathing</button>
+                    </div>
+                </div>
+                
+                <div class="exercises-grid">
+                    <div class="exercise-card" data-category="meditation">
+                        <div class="exercise-image">
+                            <img src="https://kdham.com/wp-content/uploads/2013/10/meditation-2.jpg" alt="Meditation">
+
+                            <div class="exercise-duration">20 min</div>
+                        </div>
+                        <div class="exercise-content">
+                            <h4>Morning Meditation</h4>
+                            <p>Start your day with mindful meditation to reduce stress and increase focus.</p>
+                            <div class="exercise-progress">
+                                <span class="progress-label">Progress: 12/30 days</span>
+                                <div class="progress-bar-small">
+                                    <div class="progress-fill-small" style="width: 40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exercise-actions" style="margin:20px;">
+  <button class="btn-small primary" 
+          style="padding:8px 14px;background:#007bff;color:#fff;border:none;border-radius:4px;cursor:pointer;margin:4px;"
+          onclick="
+            document.getElementById('popup').style.display='flex';
+            startMeditationTimer();
+          ">
+    Start Exercise
+  </button>
+
+  <button class="btn-small secondary" 
+          style="padding:8px 14px;background:#6c757d;color:#fff;border:none;border-radius:4px;cursor:pointer;margin:4px;">
+    View Guide
+  </button>
+</div>
+
+<!-- Popup -->
+<div id='popup' 
+     style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);
+            justify-content:center;align-items:center;">
+  <div style="background:#fff;padding:20px;border-radius:8px;width:280px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+    <h3 style="margin:0 0 10px;">Exercise Timer</h3>
+    <div id='timer' style="font-size:24px;font-weight:bold;margin:10px 0;">60</div>
+
+    <button style="padding:6px 12px;background:#6c757d;color:#fff;border:none;border-radius:4px;margin:5px;cursor:pointer;"
+            onclick="stopMeditationTimer()">Stop Timer</button>
+
+    <button style="padding:6px 12px;background:#007bff;color:#fff;border:none;border-radius:4px;margin:5px;cursor:pointer;"
+            onclick="closeMeditationPopup()">Close</button>
+  </div>
+</div>
+
+<script>
+  // Unique timer for Meditation exercise
+  let meditationCountdown;
+  let meditationTimeLeft = 60;
+
+  function startMeditationTimer() {
+    meditationTimeLeft = 60;
+    document.getElementById('timer').innerText = meditationTimeLeft;
+    clearInterval(meditationCountdown);
+    meditationCountdown = setInterval(() => {
+      meditationTimeLeft--;
+      document.getElementById('timer').innerText = meditationTimeLeft;
+      if (meditationTimeLeft <= 0) {
+        clearInterval(meditationCountdown);
+      }
+    }, 1000);
+  }
+
+  function stopMeditationTimer() {
+    clearInterval(meditationCountdown);
+  }
+
+  function closeMeditationPopup() {
+    clearInterval(meditationCountdown);
+    document.getElementById('popup').style.display='none';
+  }
+</script>
+
+                    </div>
+
+<div class="exercise-card" data-category="breathing">
+    <div class="exercise-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp5VP4LLuOWIOsOzhZy2did9efSluKFn4yYw&s" alt="Breathing">
+        <div class="exercise-duration">15 min</div>
+    </div>
+    <div class="exercise-content">
+        <h4>Pranayama Breathing</h4>
+        <p>Ancient breathing techniques to balance your energy and calm the mind.</p>
+        <div class="exercise-progress">
+            <span class="progress-label">Progress: 8/21 days</span>
+            <div class="progress-bar-small">
+                <div class="progress-fill-small" style="width: 38%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="exercise-actions" style="margin:20px;">
+<button class="btn-small primary" 
+        style="padding:8px 14px;background:#007bff;color:#fff;border:none;border-radius:4px;cursor:pointer;margin:4px;"
+        onclick="
+          document.getElementById('popup-breathing').style.display='flex';
+          startBreathingTimer();
+        ">
+  Start Exercise
+</button>
+
+<button class="btn-small secondary" 
+        style="padding:8px 14px;background:#6c757d;color:#fff;border:none;border-radius:4px;cursor:pointer;margin:4px;">
+  View Guide
+</button>
+</div>
+
+<!-- Popup -->
+<div id='popup-breathing' 
+   style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);
+          justify-content:center;align-items:center;">
+<div style="background:#fff;padding:20px;border-radius:8px;width:280px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+  <h3 style="margin:0 0 10px;">Exercise Timer</h3>
+  <div id='timer-breathing' style="font-size:24px;font-weight:bold;margin:10px 0;">60</div>
+
+  <button style="padding:6px 12px;background:#6c757d;color:#fff;border:none;border-radius:4px;margin:5px;cursor:pointer;"
+          onclick="stopBreathingTimer()">Stop Timer</button>
+
+  <button style="padding:6px 12px;background:#007bff;color:#fff;border:none;border-radius:4px;margin:5px;cursor:pointer;"
+          onclick="closeBreathingPopup()">Close</button>
+</div>
+</div>
+
+<script>
+  let breathingCountdown;
+  let breathingTimeLeft = 60;
+
+  function startBreathingTimer() {
+    breathingTimeLeft = 60;
+    document.getElementById('timer-breathing').innerText = breathingTimeLeft;
+    clearInterval(breathingCountdown);
+    breathingCountdown = setInterval(() => {
+      breathingTimeLeft--;
+      document.getElementById('timer-breathing').innerText = breathingTimeLeft;
+      if (breathingTimeLeft <= 0) {
+        clearInterval(breathingCountdown);
+      }
+    }, 1000);
+  }
+
+  function stopBreathingTimer() {
+    clearInterval(breathingCountdown);
+  }
+
+  function closeBreathingPopup() {
+    clearInterval(breathingCountdown);
+    document.getElementById('popup-breathing').style.display='none';
+  }
+</script>
+
+                    </div>
+
+<div class="exercise-card" data-category="yoga">
+    <div class="exercise-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG0_y_MwpPE0rasbOHA1LNQjwJPow01NM1ug&s" alt="Yoga">
+        <div class="exercise-duration">30 min</div>
+    </div>
+    <div class="exercise-content">
+        <h4>Gentle Yoga Flow</h4>
+        <p>Gentle yoga poses to improve flexibility and reduce physical tension.</p>
+        <div class="exercise-progress">
+            <span class="progress-label">Progress: 5/15 sessions</span>
+            <div class="progress-bar-small">
+                <div class="progress-fill-small" style="width: 33%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="exercise-actions" style="margin:20px;">
+<button class="btn-small primary" 
+        style="padding:8px 14px;background:#007bff;color:#fff;border:none;border-radius:4px;cursor:pointer;margin:4px;"
+        onclick="
+          document.getElementById('popup-yoga').style.display='flex';
+          startYogaTimer();
+        ">
+  Start Exercise
+</button>
+
+<button class="btn-small secondary" 
+        style="padding:8px 14px;background:#6c757d;color:#fff;border:none;border-radius:4px;cursor:pointer;margin:4px;">
+  View Guide
+</button>
+</div>
+
+<!-- Popup -->
+<div id='popup-yoga' 
+   style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);
+          justify-content:center;align-items:center;">
+<div style="background:#fff;padding:20px;border-radius:8px;width:280px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+  <h3 style="margin:0 0 10px;">Exercise Timer</h3>
+  <div id="timer-yoga" style="font-size:24px;font-weight:bold;margin:10px 0;">60</div>
+
+  <button style="padding:6px 12px;background:#6c757d;color:#fff;border:none;border-radius:4px;margin:5px;cursor:pointer;"
+          onclick="stopYogaTimer()">Stop Timer</button>
+
+  <button style="padding:6px 12px;background:#007bff;color:#fff;border:none;border-radius:4px;margin:5px;cursor:pointer;"
+          onclick="closeYogaPopup()">Close</button>
+</div>
+</div>
+
+<script>
+  let yogaCountdown;
+  let yogaTimeLeft = 60;
+
+  function startYogaTimer() {
+    yogaTimeLeft = 60;
+    document.getElementById('timer-yoga').innerText = yogaTimeLeft;
+    clearInterval(yogaCountdown);
+    yogaCountdown = setInterval(() => {
+      yogaTimeLeft--;
+      document.getElementById('timer-yoga').innerText = yogaTimeLeft;
+      if (yogaTimeLeft <= 0) {
+        clearInterval(yogaCountdown);
+      }
+    }, 1000);
+  }
+
+  function stopYogaTimer() {
+    clearInterval(yogaCountdown);
+  }
+
+  function closeYogaPopup() {
+    clearInterval(yogaCountdown);
+    document.getElementById('popup-yoga').style.display='none';
+  }
+</script>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Section -->
+            <section id="community" class="content-section">
+                <div class="section-header">
+                    <h2>Patient Community</h2>
+                    <button class="btn primary" id="newPostBtn">Share Your Journey</button>
+                </div>
+                
+                <div class="community-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">1,247</span>
+                        <span class="stat-label">Active Members</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">89</span>
+                        <span class="stat-label">Success Stories</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">156</span>
+                        <span class="stat-label">Daily Posts</span>
+                    </div>
+                </div>
+
+                <div class="community-feed">
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="/placeholder.svg?height=40&width=40" alt="User" class="post-avatar">
+                            <div class="post-user">
+                                <h5>Anjali M.</h5>
+                                <span class="post-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>Just completed my 30-day meditation challenge! Feeling more peaceful and centered than ever. Thank you to this amazing community for the support! 🙏</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action">👍 12 Likes</button>
+                            <button class="post-action">💬 5 Comments</button>
+                            <button class="post-action">🔗 Share</button>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="/placeholder.svg?height=40&width=40" alt="User" class="post-avatar">
+                            <div class="post-user">
+                                <h5>Rahul K.</h5>
+                                <span class="post-time">5 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>Week 3 of Panchakarma treatment and I'm already seeing amazing results! My energy levels are through the roof. Has anyone else experienced similar improvements?</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action">👍 8 Likes</button>
+                            <button class="post-action">💬 3 Comments</button>
+                            <button class="post-action">🔗 Share</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- E-Library Section -->
+            <section id="library" class="content-section">
+                <div class="section-header">
+                    <h2>E-Library</h2>
+                    <div class="library-search">
+                        <input type="search" placeholder="Search resources..." class="search-input">
+                        <select class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="guides">Treatment Guides</option>
+                            <option value="recipes">Ayurvedic Recipes</option>
+                            <option value="exercises">Exercise Videos</option>
+                            <option value="articles">Articles</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="library-grid">
+                    <div class="resource-card">
+                        <div class="resource-image">
+                           <img src="https://assets.clevelandclinic.org/transform/LargeFeatureImage/2d536049-b17c-4b88-b1e3-85f78f7d9fea/Ayurveda-173877738-770x533-1_jpg" 
+     alt="Guide" 
+     style="height:120px; width:400px;">
+
+                            <div class="resource-type">PDF</div>
+                        </div>
+                        <div class="resource-content">
+                            <h4>Complete Guide to Stress Management</h4>
+                            <p>Comprehensive guide covering Ayurvedic approaches to managing stress and anxiety.</p>
+                            <div class="resource-meta">
+                                <span class="resource-pages">24 pages</span>
+                                <span class="resource-rating">⭐ 4.8</span>
+                            </div>
+                        </div>
+                        <div class="resource-actions">
+    <a href="https://www.uakron.edu/armyrotc/MS1/14.pdf" target="_blank">
+        <button class="btn-small primary">Download</button>
+    </a>
+    <a href="https://www.uakron.edu/armyrotc/MS1/14.pdf" target="_blank">
+        <button class="btn-small secondary">Preview</button>
+    </a>
+</div>
+
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeoQJRQ8gDmNeKo6tG9LLedfsVgkSv811bqw&s" 
+     alt="Guide" 
+     style="height:120px; width:400px;">
+
+                            <div class="resource-type">PDF</div>
+                        </div>
+                        <div class="resource-content">
+                            <h4>Healing Ayurvedic Recipes</h4>
+                            <p>Collection of therapeutic recipes designed to support your healing journey.</p>
+                            <div class="resource-meta">
+                                <span class="resource-pages">36 pages</span>
+                                <span class="resource-rating">⭐ 4.9</span>
+                            </div>
+                        </div>
+                      <div class="resource-actions">
+    <a href="https://ayushportal.nic.in/pdf/Food_Recipes_From_AYUSH.pdf" download>
+        <button class="btn-small primary">Download</button>
+    </a>
+    <a href="https://ayushportal.nic.in/pdf/Food_Recipes_From_AYUSH.pdf" target="_blank">
+        <button class="btn-small secondary">Preview</button>
+    </a>
+</div>
+
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA3NQ5pzJ8PrjsAk8vnNd5LiXz2ulItuvmKw&s" 
+     alt="Guide" 
+     style="height:120px; width: 400px;">
+
+                            <div class="resource-type">Video</div>
+                        </div>
+                        <div class="resource-content">
+                            <h4>Guided Meditation Series</h4>
+                            <p>Step-by-step video tutorials for different meditation techniques.</p>
+                            <div class="resource-meta">
+                                <span class="resource-pages">45 min</span>
+                                <span class="resource-rating">⭐ 4.7</span>
+                            </div>
+                        </div>
+                      <div class="resource-actions">
+    <a href="https://www.youtube.com/playlist?list=PLCIrre1vyDlxD5RvnnVZxW-C6lv5mz-y6" target="_blank">
+        <button class="btn-small primary">Watch</button>
+    </a>
+    <a href="https://www.youtube.com/playlist?list=PLCIrre1vyDlxD5RvnnVZxW-C6lv5mz-y6" download>
+        <button class="btn-small secondary">Save</button>
+    </a>
+</div>
+
+                    </div>
+                </div>
+            </section>
+
+            
+            <!-- Feedback Section -->
+            <section id="feedback" class="content-section">
+                <div class="section-header">
+                    <h2>Share Your Feedback</h2>
+                    <p class="section-subtitle">Help us improve your experience</p>
+                </div>
+                
+                <div class="feedback-container">
+                    <div class="feedback-card">
+                        <h3>Rate Your Experience</h3>
+                        <div class="rating-section">
+                            <div class="rating-item">
+                                <span class="rating-label">Overall Treatment Experience</span>
+                                <div class="star-rating" data-rating="0">
+                                    <span class="star" data-value="1">⭐</span>
+                                    <span class="star" data-value="2">⭐</span>
+                                    <span class="star" data-value="3">⭐</span>
+                                    <span class="star" data-value="4">⭐</span>
+                                    <span class="star" data-value="5">⭐</span>
+                                </div>
+                            </div>
+                            <div class="rating-item">
+                                <span class="rating-label">Doctor Communication</span>
+                                <div class="star-rating" data-rating="0">
+                                    <span class="star" data-value="1">⭐</span>
+                                    <span class="star" data-value="2">⭐</span>
+                                    <span class="star" data-value="3">⭐</span>
+                                    <span class="star" data-value="4">⭐</span>
+                                    <span class="star" data-value="5">⭐</span>
+                                </div>
+                            </div>
+                            <div class="rating-item">
+                                <span class="rating-label">Platform Usability</span>
+                                <div class="star-rating" data-rating="0">
+                                    <span class="star" data-value="1">⭐</span>
+                                    <span class="star" data-value="2">⭐</span>
+                                    <span class="star" data-value="3">⭐</span>
+                                    <span class="star" data-value="4">⭐</span>
+                                    <span class="star" data-value="5">⭐</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feedback-form">
+                            <div class="form-group">
+                                <label>What did you like most about your experience?</label>
+                                <textarea placeholder="Share what you enjoyed..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>How can we improve?</label>
+                                <textarea placeholder="Share your suggestions..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    I would recommend Panchsutra Therapy to others
+                                </label>
+                            </div>
+                            <button class="btn primary">Submit Feedback</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // ---------------- Logout ----------------
+    const logoutBtn = document.getElementById("logoutBtn");
+    if(logoutBtn){
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                const res = await fetch("/logout", { method: "POST", credentials: "same-origin" });
+                if(res.ok){
+                    localStorage.removeItem("token");
+                    window.location.href = "/login-page";
+                } else alert("Logout failed");
+            } catch(err){
+                alert("⚠️ Backend not reachable");
+            }
+        });
+    }
+
+    // ---------------- Section Switching ----------------
+    const links = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll(".content-section");
+
+    function activateSection(id){
+        // Hide all sections
+        sections.forEach(sec => sec.classList.remove("active"));
+
+        // Show target section
+        const target = document.getElementById(id);
+        if(target) target.classList.add("active");
+
+        // Update sidebar active link
+        links.forEach(l => l.parentElement.classList.remove("active"));
+        const activeLink = document.querySelector(`.nav-link[data-section="${id}"]`);
+        if(activeLink) activeLink.parentElement.classList.add("active");
+    }
+
+    // Sidebar link clicks
+    links.forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();  // Prevent default anchor behavior
+            const sectionId = link.dataset.section;
+            activateSection(sectionId);
+
+            // Update URL hash without scrolling
+            history.pushState(null, null, `#${sectionId}`);
+        });
+    });
+
+    // Handle back/forward browser buttons
+    window.addEventListener("hashchange", () => {
+        const hash = window.location.hash.substring(1);
+        if(hash) activateSection(hash);
+    });
+
+    // On page load: check hash
+    const initialHash = window.location.hash.substring(1);
+    if(initialHash) activateSection(initialHash);
+    else activateSection("dashboard"); // default section
+});
+</script>
+<!-- Floating Chatbot -->
+<div id="chatbot-button">
+  <i class="fas fa-comments"></i>
+</div>
+
+<div id="chatbot-container" class="hidden">
+  <div id="chatbot-header">
+    Panchsutra Assistant
+    <span id="chatbot-close">&times;</span>
+  </div>
+  <div id="chatbot-messages"></div>
+  <div id="chatbot-input-area">
+    <input id="chatbot-input" type="text" placeholder="Ask me about Panchakarma, Yoga, Ayurveda...">
+    <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* Floating WhatsApp-style button */
+#chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+/* Chat Window */
+#chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  font-family: 'DM Sans', sans-serif;
+  z-index: 1001;
+}
+#chatbot-container.hidden { display: none; }
+#chatbot-header {
+  background: #25d366;
+  color: white;
+  padding: 10px;
+  border-radius: 12px 12px 0 0;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#chatbot-header #chatbot-close {
+  cursor: pointer;
+  font-size: 20px;
+}
+#chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+#chatbot-input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+#chatbot-input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  outline: none;
+}
+#chatbot-send {
+  border: none;
+  background: #25d366;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.message {
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+.user-message {
+  background: #dcf8c6;
+  align-self: flex-end;
+}
+.bot-message {
+  background: #f1f1f1;
+  align-self: flex-start;
+}
+</style>
+
+<script src="{{ url_for('static', filename='js/bot/script.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const newPostBtn = document.getElementById("newPostBtn");
+    const communityFeed = document.querySelector(".community-feed");
+
+    newPostBtn.addEventListener("click", function () {
+        // Ask user for their message
+        const message = prompt("Share your journey with the community:");
+        if (!message || message.trim() === "") return;
+
+        // Create a new post card
+        const postCard = document.createElement("div");
+        postCard.classList.add("post-card");
+        postCard.innerHTML = `
+            <div class="post-header">
+                <img src="/placeholder.svg?height=40&width=40" alt="User" class="post-avatar">
+                <div class="post-user">
+                    <h5>You</h5>
+                    <span class="post-time">Just now</span>
+                </div>
+            </div>
+            <div class="post-content">
+                <p>${message}</p>
+            </div>
+            <div class="post-actions">
+                <button class="post-action">👍 0 Likes</button>
+                <button class="post-action">💬 0 Comments</button>
+                <button class="post-action">🔗 Share</button>
+            </div>
+        `;
+
+        // Add new post at the top of the feed
+        communityFeed.insertBefore(postCard, communityFeed.firstChild);
+    });
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Panchsutra Therapy</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <style>
+    .hidden { display: none; }
+    .auth-container { display:flex; justify-content:center; align-items:center; height:100vh; }
+    .auth-card { width:400px; padding:20px; border:1px solid #ccc; border-radius:10px; background:#fff; }
+    .auth-form .form-group { margin-bottom:15px; }
+    .auth-btn { width:100%; padding:10px; margin-top:10px; }
+    .switch-text { text-align:center; margin-top:15px; }
+    .switch-text a { color:#007BFF; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo-container" style="text-align:center;">
+          <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+          <h2>Panchsutra<span class="accent-text">Therapy</span></h2>
+        </div>
+        <h1 style="text-align:center;">Welcome</h1>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Select Your Role</label>
+          <select id="role" name="role" required>
+            <option value="">Choose your role</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
+        </div>
+
+        <button type="submit" class="auth-btn primary">Sign In</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="auth-form hidden">
+        <div class="form-group">
+          <label for="regRole">Register as</label>
+          <select id="regRole" name="role" required>
+            <option value="">Choose your role</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
+        </div>
+
+        <!-- Common Fields -->
+        <div id="commonFields" class="hidden">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required />
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" name="password" required />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required />
+          </div>
+        </div>
+
+        <!-- Doctor Fields -->
+        <div id="doctorFields" class="hidden">
+          <div class="form-group">
+            <label for="specialization">Specialization</label>
+            <input type="text" id="specialization" name="specialization" />
+          </div>
+          <div class="form-group">
+            <label for="qualification">Qualification</label>
+            <input type="text" id="qualification" name="qualification" />
+          </div>
+        </div>
+
+        <!-- Patient Fields -->
+        <div id="patientFields" class="hidden">
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" />
+          </div>
+          <div class="form-group">
+            <label for="problem">Problem</label>
+            <input type="text" id="problem" name="problem" />
+          </div>
+          <div class="form-group">
+            <label for="history">Medical History</label>
+            <textarea id="history" name="history"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="auth-btn primary">Create Account</button>
+      </form>
+
+      <div class="switch-text" id="switchText">
+        <span>Don’t have an account?</span> <a href="#" id="switchLink">Register here</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const switchText = document.getElementById("switchText");
+    const switchLink = document.getElementById("switchLink");
+
+    // Role fields toggle for register
+    const roleSelect = document.getElementById("regRole");
+    const commonFields = document.getElementById("commonFields");
+    const doctorFields = document.getElementById("doctorFields");
+    const patientFields = document.getElementById("patientFields");
+
+    roleSelect.addEventListener("change", function () {
+      commonFields.classList.add("hidden");
+      doctorFields.classList.add("hidden");
+      patientFields.classList.add("hidden");
+
+      if (this.value) commonFields.classList.remove("hidden");
+      if (this.value === "doctor") doctorFields.classList.remove("hidden");
+      if (this.value === "patient") patientFields.classList.remove("hidden");
+    });
+
+    // Switch login/register
+    switchLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      loginForm.classList.toggle("hidden");
+      registerForm.classList.toggle("hidden");
+
+      if (loginForm.classList.contains("hidden")) {
+        switchText.querySelector("span").textContent = "Already have an account?";
+        switchLink.textContent = "Login here";
+      } else {
+        switchText.querySelector("span").textContent = "Don’t have an account?";
+        switchLink.textContent = "Register here";
+      }
+    });
+
+    // Login submit
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        role: document.getElementById("role").value,
+      };
+      try {
+        const res = await fetch("http://127.0.0.1:5000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          localStorage.setItem("token", result.token);
+          window.location.href = result.redirect;
+        } else {
+          alert(result.message || "Login failed");
+        }
+      } catch (err) {
+        alert("⚠️ Backend not reachable");
+      }
+    });
+
+    // Register submit
+    registerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (
+        document.getElementById("regPassword").value !==
+        document.getElementById("confirmPassword").value
+      ) {
+        alert("⚠️ Passwords do not match");
+        return;
+      }
+
+      const data = {
+        fullName: document.getElementById("fullName").value,
+        email: document.getElementById("regEmail").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("regPassword").value,
+        role: document.getElementById("regRole").value,
+        specialization: document.getElementById("specialization")?.value,
+        qualification: document.getElementById("qualification")?.value,
+        address: document.getElementById("address")?.value,
+        problem: document.getElementById("problem")?.value,
+        history: document.getElementById("history")?.value,
+      };
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          localStorage.setItem("token", result.token);
+          window.location.href = result.redirect;
+        } else {
+          alert(result.message);
+        }
+      } catch (err) {
+        alert("⚠️ Backend not reachable");
+      }
+    });
+  </script>
+</body>
+</html>

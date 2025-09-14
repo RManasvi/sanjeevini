@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchsutra Therapy - Holistic Healing & Wellness</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Updated fonts to Space Grotesk and DM Sans for more creative typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Added floating elements and enhanced visual hierarchy -->
+    <div class="floating-elements">
+        <div class="floating-leaf floating-leaf-1"></div>
+        <div class="floating-leaf floating-leaf-2"></div>
+        <div class="floating-leaf floating-leaf-3"></div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +1 (555) 123-4567</span>
+                <span><i class="fas fa-envelope"></i> info@panchsutratherapy.com</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <!-- Enhanced logo with creative styling -->
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Panchsutra<span class="accent-text">Therapy</span></h2>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#therapies">Therapies</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-search"></i>
+                
+                <!-- Added login button for better visibility -->
+                
+                    <i class="fas fa-user"></i>
+                   <a href="{{ url_for('login_page') }}" class="btn-login">Login</a>
+                </a>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <!-- Added creative geometric shapes and enhanced visual elements -->
+        <div class="hero-bg">
+            <div class="geometric-shape shape-1"></div>
+            <div class="geometric-shape shape-2"></div>
+            <div class="geometric-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <!-- Enhanced typography with creative text styling -->
+                <div class="hero-badge">✨ Ancient Wisdom Meets Modern Healing</div>
+                <h1 class="hero-title">
+                    Experience <span class="gradient-text">Holistic Healing</span> 
+                    with Panchsutra Therapy
+                </h1>
+                <p class="hero-description">Discover the ancient wisdom of Ayurveda combined with modern therapeutic techniques. Our certified therapists provide personalized healing solutions for your mind, body, and soul.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">
+                        <span>View Services</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn-secondary">
+
+                        <span onclick="window.location.href='#about'" style="cursor:pointer;">Why choose us</span>
+                    </button>
+                </div>
+                <!-- Added trust indicators -->
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certified Therapists</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-users"></i>
+                        <span>25k+ Happy Clients</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-award"></i>
+                        <span>15+ Years Experience</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Added hero image with creative overlay -->
+            <div class="hero-image">
+                <div class="image-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=500&fit=crop" alt="Therapy Session">
+                <div class="floating-card">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>92% Success Rate</h4>
+                        <p>Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced category section with creative card designs -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Explore Our <span class="accent-text">Healing Categories</span></h2>
+                <p class="section-subtitle">Comprehensive wellness solutions tailored to your unique needs</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=300&h=200&fit=crop" alt="Therapy Programs">
+                        <div class="card-overlay">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Therapy Programs</h3>
+                        <p>Comprehensive healing programs tailored to your specific needs and health goals.</p>
+                        <a href="#therapy-programs" class="learn-more">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="category-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop" alt="Wellness Packages">
+                        <div class="card-overlay">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Wellness Packages</h3>
+                        <p>Complete wellness solutions combining multiple therapies for optimal health benefits.</p>
+                        <a href="#wellness-packages" class="learn-more">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=300&h=200&fit=crop" alt="Ayurvedic Products">
+                        <div class="card-overlay">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Ayurvedic Products</h3>
+                        <p>Premium quality herbal products and supplements for natural healing and wellness.</p>
+                        <a href="#ayurvedic-products" class="learn-more">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Panchsutra Section -->
+    <section class="why-panchsutra" id="about">
+        <div class="container">
+            <h2>Why Choose Panchsutra Therapy</h2>
+            <div class="benefits-circle">
+                <div class="center-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="benefit-item" data-position="top">100% Natural</div>
+                <div class="benefit-item" data-position="top-right">Certified Therapists</div>
+                <div class="benefit-item" data-position="right">Holistic Healing</div>
+                <div class="benefit-item" data-position="bottom-right">Quality Care</div>
+                <div class="benefit-item" data-position="bottom">Personalized Plans</div>
+                <div class="benefit-item" data-position="bottom-left">Health First</div>
+                <div class="benefit-item" data-position="left">Ancient Wisdom</div>
+                <div class="benefit-item" data-position="top-left">Modern Techniques</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Therapies Slider -->
+    <section class="trending-therapies" id="therapies">
+        <div class="container">
+            <h2>Trending Therapies</h2>
+            <div class="slider-container">
+                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="therapy-slider">
+                    <div class="therapy-slide">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=250&fit=crop" alt="Abhyanga Massage">
+                        <h3>Abhyanga Massage</h3>
+                        <p>Full body oil massage for deep relaxation and rejuvenation</p>
+                        <div class="price">$110/session</div>
+                    </div>
+                    <div class="therapy-slide">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=250&fit=crop" alt="Shirodhara">
+                        <h3>Shirodhara</h3>
+                        <p>Continuous oil pouring therapy for mental clarity and peace</p>
+                        <div class="price">$150/session</div>
+                    </div>
+                    <div class="therapy-slide">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=300&h=250&fit=crop" alt="Nasya Therapy">
+                        <h3>Nasya Therapy</h3>
+                        <p>Nasal administration of medicines for respiratory wellness</p>
+                        <div class="price">$85/session</div>
+                    </div>
+                    <div class="therapy-slide">
+                        <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=300&h=250&fit=crop" alt="Marma Therapy">
+                        <h3>Marma Therapy</h3>
+                        <p>Pressure point therapy for energy balance and healing</p>
+                        <div class="price">$95/session</div>
+                    </div>
+                </div>
+                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Services Section -->
+    <section class="top-services" id="services">
+        <div class="container">
+            <h2>Our Top Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=250&h=200&fit=crop" alt="Detox Therapy">
+                    <h3>Detox Therapy</h3>
+                    <p>Complete body detoxification using traditional Ayurvedic methods</p>
+                    <div class="price">$120/session</div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=250&h=200&fit=crop" alt="Stress Relief">
+                    <h3>Stress Relief</h3>
+                    <p>Specialized techniques to reduce stress and promote mental wellness</p>
+                    <div class="price">$90/session</div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=250&h=200&fit=crop" alt="Panchakarma">
+                    <h3>Panchakarma</h3>
+                    <p>Traditional five-action detoxification and rejuvenation therapy</p>
+                    <div class="price">$200/session</div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=250&h=200&fit=crop" alt="Yoga Sessions">
+                    <h3>Yoga Sessions</h3>
+                    <p>Personalized yoga practice for physical and mental balance</p>
+                    <div class="price">$60/session</div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=250&h=200&fit=crop" alt="Herbal Care">
+                    <h3>Herbal Care</h3>
+                    <p>Natural herbal treatments for various health conditions</p>
+                    <div class="price">$80/session</div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=250&h=200&fit=crop" alt="Mindfulness Training">
+                    <h3>Mindfulness Training</h3>
+                    <p>Learn meditation and mindfulness techniques for inner peace</p>
+                    <div class="price">$70/session</div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements">
+        <div class="container">
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <div class="achievement-number">15+</div>
+                    <div class="achievement-text">Years of Experience</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">25k+</div>
+                    <div class="achievement-text">Clients Healed</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">100+</div>
+                    <div class="achievement-text">Certified Therapists</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">92%</div>
+                    <div class="achievement-text">Positive Feedback</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="review-slider">
+                <div class="review-slide active">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Sarah Johnson">
+                    <h3>Sarah Johnson</h3>
+                    <p>"The Panchakarma treatment at Panchsutra completely transformed my health. I feel more energetic and balanced than ever before. Highly recommended!"</p>
+                </div>
+                <div class="review-slide">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Michael Chen">
+                    <h3>Michael Chen</h3>
+                    <p>"The stress relief therapy helped me manage my anxiety naturally. The therapists are incredibly knowledgeable and caring."</p>
+                </div>
+                <div class="review-slide">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Emily Davis">
+                    <h3>Emily Davis</h3>
+                    <p>"I've been coming here for yoga sessions and herbal treatments. The holistic approach has improved my overall well-being significantly."</p>
+                </div>
+            </div>
+            <div class="review-navigation">
+                <button class="review-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="review-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="latest-news" id="blog">
+        <div class="container">
+            <h2>Latest News & Articles</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=350&h=200&fit=crop" alt="Ayurveda Benefits">
+                    <div class="news-content">
+                        <div class="news-date">March 15, 2024</div>
+                        <h3>The Science Behind Ayurvedic Healing</h3>
+                        <p>Discover how ancient Ayurvedic principles are backed by modern scientific research...</p>
+                        <!-- Made read more button functional to show detailed article -->
+                        <a href="#article-1" class="read-more">Read More</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=350&h=200&fit=crop" alt="Stress Management">
+                    <div class="news-content">
+                        <div class="news-date">March 10, 2024</div>
+                        <h3>Natural Ways to Manage Stress and Anxiety</h3>
+                        <p>Learn effective techniques to reduce stress naturally without medication...</p>
+                        <!-- Made read more button functional to show detailed article -->
+                        <a href="#article-2" class="read-more">Read More</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=350&h=200&fit=crop" alt="Yoga Benefits">
+                    <div class="news-content">
+                        <div class="news-date">March 5, 2024</div>
+                        <h3>Yoga and Meditation for Mental Wellness</h3>
+                        <p>Explore the mental health benefits of regular yoga and meditation practice...</p>
+                        <!-- Made read more button functional to show detailed article -->
+                        <a href="#article-3" class="read-more">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Details Section -->
+    <section class="article-details" id="article-1" style="display: none;">
+        <div class="container">
+            <div class="article-content">
+                <button class="back-to-blog"><i class="fas fa-arrow-left"></i> Back to Blog</button>
+                <h1>The Science Behind Ayurvedic Healing</h1>
+                <div class="article-meta">
+                    <span class="date">March 15, 2024</span>
+                    <span class="author">By Dr. Priya Sharma</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&h=400&fit=crop" alt="Ayurveda Research">
+                <div class="article-text">
+                    <p>Ayurveda, the ancient Indian system of medicine, has been practiced for over 5,000 years. Recent scientific research has begun to validate many of the principles and treatments that have been used traditionally in Ayurvedic medicine.</p>
+                    
+                    <h3>Modern Research Validates Ancient Wisdom</h3>
+                    <p>Studies published in peer-reviewed journals have shown that many Ayurvedic herbs and treatments have measurable therapeutic effects. For example, turmeric (Curcuma longa) has been extensively studied for its anti-inflammatory properties, while ashwagandha has been shown to reduce cortisol levels and stress.</p>
+                    
+                    <h3>The Holistic Approach</h3>
+                    <p>What sets Ayurveda apart is its holistic approach to health. Rather than treating symptoms in isolation, Ayurveda considers the whole person - their constitution, lifestyle, environment, and mental state. This comprehensive approach aligns with modern understanding of personalized medicine.</p>
+                    
+                    <h3>Evidence-Based Treatments</h3>
+                    <p>Clinical trials have demonstrated the effectiveness of various Ayurvedic treatments for conditions such as arthritis, diabetes, anxiety, and digestive disorders. The integration of traditional knowledge with modern scientific methods is opening new avenues for natural healing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="article-details" id="article-2" style="display: none;">
+        <div class="container">
+            <div class="article-content">
+                <button class="back-to-blog"><i class="fas fa-arrow-left"></i> Back to Blog</button>
+                <h1>Natural Ways to Manage Stress and Anxiety</h1>
+                <div class="article-meta">
+                    <span class="date">March 10, 2024</span>
+                    <span class="author">By Dr. Rajesh Kumar</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop" alt="Stress Management">
+                <div class="article-text">
+                    <p>In today's fast-paced world, stress and anxiety have become common challenges. While medication can be helpful, there are many natural approaches that can effectively manage these conditions without side effects.</p>
+                    
+                    <h3>Breathing Techniques</h3>
+                    <p>Pranayama, or controlled breathing exercises, are powerful tools for managing stress. Deep breathing activates the parasympathetic nervous system, promoting relaxation and reducing cortisol levels. Simple techniques like the 4-7-8 breath can be practiced anywhere.</p>
+                    
+                    <h3>Herbal Remedies</h3>
+                    <p>Several herbs have been scientifically proven to reduce anxiety and stress. Ashwagandha, brahmi, and jatamansi are traditional Ayurvedic herbs that help balance the nervous system and promote mental clarity.</p>
+                    
+                    <h3>Lifestyle Modifications</h3>
+                    <p>Regular exercise, adequate sleep, and a balanced diet play crucial roles in stress management. Ayurveda emphasizes the importance of daily routines (dinacharya) that align with natural rhythms to maintain mental and physical balance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="article-details" id="article-3" style="display: none;">
+        <div class="container">
+            <div class="article-content">
+                <button class="back-to-blog"><i class="fas fa-arrow-left"></i> Back to Blog</button>
+                <h1>Yoga and Meditation for Mental Wellness</h1>
+                <div class="article-meta">
+                    <span class="date">March 5, 2024</span>
+                    <span class="author">By Yoga Master Ananda</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=800&h=400&fit=crop" alt="Yoga Meditation">
+                <div class="article-text">
+                    <p>Yoga and meditation are powerful practices that have been shown to significantly improve mental health and overall well-being. These ancient practices offer practical tools for managing modern life's challenges.</p>
+                    
+                    <h3>The Mental Health Benefits</h3>
+                    <p>Research has consistently shown that regular yoga and meditation practice can reduce symptoms of depression, anxiety, and PTSD. These practices help regulate the nervous system and promote emotional balance.</p>
+                    
+                    <h3>Different Types of Practice</h3>
+                    <p>From gentle restorative yoga to dynamic vinyasa flows, there are practices suitable for every body and mind. Meditation techniques range from mindfulness to mantra-based practices, each offering unique benefits for mental clarity and peace.</p>
+                    
+                    <h3>Building a Sustainable Practice</h3>
+                    <p>The key to experiencing the benefits of yoga and meditation is consistency. Even 10-15 minutes of daily practice can create significant positive changes in mental health and stress resilience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Therapy Programs Detail -->
+    <section class="therapy-programs-detail" id="therapy-programs" style="display: none;">
+        <div class="container">
+            <button class="back-to-categories"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+            <h1>Comprehensive Therapy Programs</h1>
+            <div class="program-grid">
+                <div class="program-card">
+                    <h3>Detoxification Program</h3>
+                    <p>A 7-14 day intensive program designed to eliminate toxins from your body using traditional Panchakarma methods.</p>
+                    <ul>
+                        <li>Initial consultation and assessment</li>
+                        <li>Customized detox plan</li>
+                        <li>Daily treatments and therapies</li>
+                        <li>Nutritional guidance</li>
+                        <li>Follow-up care</li>
+                    </ul>
+                    <div class="price">Starting from $1,200</div>
+                </div>
+                <div class="program-card">
+                    <h3>Stress Management Program</h3>
+                    <p>A holistic approach to managing stress through therapy, lifestyle changes, and mindfulness practices.</p>
+                    <ul>
+                        <li>Stress assessment and analysis</li>
+                        <li>Personalized treatment plan</li>
+                        <li>Relaxation techniques training</li>
+                        <li>Herbal support therapy</li>
+                        <li>Ongoing support and monitoring</li>
+                    </ul>
+                    <div class="price">Starting from $800</div>
+                </div>
+                <div class="program-card">
+                    <h3>Rejuvenation Program</h3>
+                    <p>Restore your vitality and energy with our comprehensive rejuvenation therapy program.</p>
+                    <ul>
+                        <li>Complete health evaluation</li>
+                        <li>Customized rejuvenation treatments</li>
+                        <li>Nutritional counseling</li>
+                        <li>Yoga and meditation sessions</li>
+                        <li>Lifestyle modification guidance</li>
+                    </ul>
+                    <div class="price">Starting from $1,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wellness Packages Detail -->
+    <section class="wellness-packages-detail" id="wellness-packages" style="display: none;">
+        <div class="container">
+            <button class="back-to-categories"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+            <h1>Complete Wellness Packages</h1>
+            <div class="package-grid">
+                <div class="package-card premium">
+                    <div class="package-badge">Most Popular</div>
+                    <h3>Complete Wellness Package</h3>
+                    <p>Our most comprehensive package combining multiple therapies for optimal health benefits.</p>
+                    <div class="package-includes">
+                        <h4>Package Includes:</h4>
+                        <ul>
+                            <li>Initial consultation with senior therapist</li>
+                            <li>5 Abhyanga massage sessions</li>
+                            <li>3 Shirodhara treatments</li>
+                            <li>Personalized herbal medicine</li>
+                            <li>Daily yoga and meditation classes</li>
+                            <li>Nutritional counseling</li>
+                            <li>Follow-up consultations</li>
+                        </ul>
+                    </div>
+                    <div class="package-price">
+                        <span class="original-price">$1,500</span>
+                        <span class="discounted-price">$1,200</span>
+                        <span class="savings">Save $300</span>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <h3>Stress Relief Package</h3>
+                    <p>Specially designed for busy professionals to manage stress and restore balance.</p>
+                    <div class="package-includes">
+                        <h4>Package Includes:</h4>
+                        <ul>
+                            <li>Stress assessment consultation</li>
+                            <li>3 Stress relief massage sessions</li>
+                            <li>2 Meditation training sessions</li>
+                            <li>Herbal stress relief supplements</li>
+                            <li>Breathing technique training</li>
+                            <li>Lifestyle modification plan</li>
+                        </ul>
+                    </div>
+                    <div class="package-price">
+                        <span class="original-price">$800</span>
+                        <span class="discounted-price">$650</span>
+                        <span class="savings">Save $150</span>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <h3>Detox & Rejuvenation Package</h3>
+                    <p>Cleanse your body and mind with our intensive detox and rejuvenation program.</p>
+                    <div class="package-includes">
+                        <h4>Package Includes:</h4>
+                        <ul>
+                            <li>Comprehensive health assessment</li>
+                            <li>7-day detox program</li>
+                            <li>Daily Panchakarma treatments</li>
+                            <li>Specialized detox diet plan</li>
+                            <li>Herbal detox supplements</li>
+                            <li>Post-detox maintenance plan</li>
+                        </ul>
+                    </div>
+                    <div class="package-price">
+                        <span class="original-price">$2,000</span>
+                        <span class="discounted-price">$1,600</span>
+                        <span class="savings">Save $400</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ayurvedic Products Detail -->
+    <section class="ayurvedic-products-detail" id="ayurvedic-products" style="display: none;">
+        <div class="container">
+            <button class="back-to-categories"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+            <h1>Premium Ayurvedic Products</h1>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=250&h=200&fit=crop" alt="Herbal Supplements">
+                    <h3>Herbal Supplements</h3>
+                    <p>Premium quality herbal supplements made from organic ingredients following traditional Ayurvedic formulations.</p>
+                    <ul>
+                        <li>Ashwagandha capsules for stress relief</li>
+                        <li>Triphala powder for digestive health</li>
+                        <li>Brahmi tablets for mental clarity</li>
+                        <li>Turmeric capsules for inflammation</li>
+                    </ul>
+                    <div class="price-range">$25 - $60 per bottle</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=250&h=200&fit=crop" alt="Massage Oils">
+                    <h3>Therapeutic Massage Oils</h3>
+                    <p>Specially formulated massage oils using traditional recipes for various therapeutic purposes.</p>
+                    <ul>
+                        <li>Sesame oil for Abhyanga massage</li>
+                        <li>Coconut oil for Pitta constitution</li>
+                        <li>Mustard oil for Kapha balance</li>
+                        <li>Herbal medicated oils for specific conditions</li>
+                    </ul>
+                    <div class="price-range">$15 - $45 per bottle</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=250&h=200&fit=crop" alt="Herbal Teas">
+                    <h3>Ayurvedic Herbal Teas</h3>
+                    <p>Carefully blended herbal teas to support various aspects of health and well-being.</p>
+                    <ul>
+                        <li>Digestive tea blend</li>
+                        <li>Calming evening tea</li>
+                        <li>Immunity boosting tea</li>
+                        <li>Detox tea blend</li>
+                    </ul>
+                    <div class="price-range">$12 - $28 per pack</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=250&h=200&fit=crop" alt="Skincare Products">
+                    <h3>Natural Skincare</h3>
+                    <p>Ayurvedic skincare products made with natural ingredients for healthy, glowing skin.</p>
+                    <ul>
+                        <li>Neem face wash for acne-prone skin</li>
+                        <li>Turmeric face mask</li>
+                        <li>Rose water toner</li>
+                        <li>Herbal moisturizers</li>
+                    </ul>
+                    <div class="price-range">$18 - $55 per product</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Information Sections -->
+    <section class="legal-info" id="privacy-policy" style="display: none;">
+        <div class="container">
+            <button class="back-to-main"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>Privacy Policy</h1>
+            <div class="legal-content">
+                <h3>Information We Collect</h3>
+                <p>We collect information you provide directly to us, such as when you create an account, book appointments, or contact us for support. This may include your name, email address, phone number, and health information relevant to your treatment.</p>
+                
+                <h3>How We Use Your Information</h3>
+                <p>We use the information we collect to provide, maintain, and improve our services, process appointments, communicate with you, and ensure the safety and effectiveness of your treatments.</p>
+                
+                <h3>Information Sharing</h3>
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy or as required by law.</p>
+                
+                <h3>Data Security</h3>
+                <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us at privacy@panchsutratherapy.com</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="legal-info" id="terms-of-service" style="display: none;">
+        <div class="container">
+            <button class="back-to-main"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>Terms of Service</h1>
+            <div class="legal-content">
+                <h3>Acceptance of Terms</h3>
+                <p>By accessing and using our services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                
+                <h3>Services Description</h3>
+                <p>Panchsutra Therapy provides holistic healing services including Ayurvedic treatments, yoga sessions, and wellness consultations. All services are provided by certified professionals.</p>
+                
+                <h3>Appointment Policy</h3>
+                <p>Appointments must be cancelled at least 24 hours in advance. Late cancellations may be subject to a cancellation fee.</p>
+                
+                <h3>Health Disclaimer</h3>
+                <p>Our services are complementary and should not replace conventional medical treatment. Please consult with your healthcare provider before beginning any new treatment program.</p>
+                
+                <h3>Limitation of Liability</h3>
+                <p>Panchsutra Therapy shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use of our services.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="legal-info" id="refund-policy" style="display: none;">
+        <div class="container">
+            <button class="back-to-main"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>Refund Policy</h1>
+            <div class="legal-content">
+                <h3>Refund Eligibility</h3>
+                <p>Refunds are available for services cancelled at least 48 hours before the scheduled appointment. Package deals may have different refund terms.</p>
+                
+                <h3>Processing Time</h3>
+                <p>Approved refunds will be processed within 5-7 business days and credited back to the original payment method.</p>
+                
+                <h3>Non-Refundable Items</h3>
+                <p>Herbal products, supplements, and completed services are non-refundable unless there is a quality issue with the product.</p>
+                
+                <h3>Partial Refunds</h3>
+                <p>For package deals, partial refunds may be available based on the unused portion of the package, subject to administrative fees.</p>
+                
+                <h3>Contact for Refunds</h3>
+                <p>To request a refund, please contact our customer service team at refunds@panchsutratherapy.com with your booking details.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="legal-info" id="medical-disclaimer" style="display: none;">
+        <div class="container">
+            <button class="back-to-main"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>Medical Disclaimer</h1>
+            <div class="legal-content">
+                <h3>Not Medical Advice</h3>
+                <p>The information and services provided by Panchsutra Therapy are for educational and wellness purposes only and are not intended as medical advice, diagnosis, or treatment.</p>
+                
+                <h3>Consult Healthcare Providers</h3>
+                <p>Always consult with qualified healthcare professionals before making any changes to your health regimen or if you have any medical conditions.</p>
+                
+                <h3>Individual Results</h3>
+                <p>Results from our treatments may vary from person to person. We cannot guarantee specific outcomes or healing results.</p>
+                
+                <h3>Emergency Situations</h3>
+                <p>Our services are not intended for emergency medical situations. In case of medical emergencies, please contact emergency services immediately.</p>
+                
+                <h3>Contraindications</h3>
+                <p>Some treatments may not be suitable for certain health conditions. Please inform us of any medical conditions, medications, or allergies before beginning treatment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Top Services</h3>
+                    <ul>
+                        <!-- Updated footer links to scroll to services section -->
+                        <li><a href="#services">Panchakarma Therapy</a></li>
+                        <li><a href="#services">Stress Relief Treatment</a></li>
+                        <li><a href="#services">Detox Programs</a></li>
+                        <li><a href="#services">Yoga Sessions</a></li>
+                        <li><a href="#services">Herbal Consultations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal Information</h3>
+                    <ul>
+                        <!-- Updated footer links to show proper legal content sections -->
+                        <li><a href="#privacy-policy" class="legal-link">Privacy Policy</a></li>
+                        <li><a href="#terms-of-service" class="legal-link">Terms of Service</a></li>
+                        <li><a href="#refund-policy" class="legal-link">Refund Policy</a></li>
+                        <li><a href="#medical-disclaimer" class="legal-link">Medical Disclaimer</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on wellness tips and special offers</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Panchsutra Therapy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

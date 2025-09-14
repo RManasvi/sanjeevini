@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - Panchsutra Therapy</title>
+    <!-- <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/dashboard.css"> -->
+     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                 <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Panchsutra<span class="accent-text">Therapy</span></h2>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#dashboard" class="nav-link" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#appointments" class="nav-link" data-section="appointments">
+                            <span class="nav-icon">📅</span>
+                            <span class="nav-text">Appointments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#patients" class="nav-link" data-section="patients">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">My Patients</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#consultations" class="nav-link" data-section="consultations">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">Consultations</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#progress" class="nav-link" data-section="progress">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">Patient Progress</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#meetings" class="nav-link" data-section="meetings">
+                            <span class="nav-icon">🎥</span>
+                            <span class="nav-text">Video Meetings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile" class="nav-link" data-section="profile">
+                            <span class="nav-icon">👨‍⚕️</span>
+                            <span class="nav-text">My Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="/placeholder.svg?height=40&width=40" alt="Doctor" class="user-avatar">
+                    <div class="user-info">
+                        <span class="user-name">Dr. Rajesh Sharma</span>
+                        <span class="user-role">Ayurveda Specialist</span>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 class="page-title">Doctor Dashboard</h1>
+                    <p class="page-subtitle">Manage your patients and appointments</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="notification-btn">
+                            <span class="notification-icon">🔔</span>
+                            <span class="notification-badge">5</span>
+                        </button>
+                        <div class="date-time">
+                            <span id="currentDateTime"></span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+</section>
+
+            <!-- Dashboard Overview Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <h3>Today's Appointments</h3>
+                            <p class="stat-number">8</p>
+                            <span class="stat-change positive">2 upcoming</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>Total Patients</h3>
+                            <p class="stat-number">156</p>
+                            <span class="stat-change positive">+12 this month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💬</div>
+                        <div class="stat-content">
+                            <h3>Pending Queries</h3>
+                            <p class="stat-number">3</p>
+                            <span class="stat-change neutral">Awaiting response</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <h3>Patient Rating</h3>
+                            <p class="stat-number">4.8</p>
+                            <span class="stat-change positive">Based on 89 reviews</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Today's Schedule</h3>
+                        <div class="schedule-list">
+                            <div class="schedule-item">
+                                <div class="schedule-time">09:00 AM</div>
+                                <div class="schedule-content">
+                                    <p class="patient-name">Priya Patel</p>
+                                    <span class="appointment-type">Follow-up Consultation</span>
+                                </div>
+                                <button class="btn-small primary">Join</button>
+                            </div>
+                            <div class="schedule-item">
+                                <div class="schedule-time">10:30 AM</div>
+                                <div class="schedule-content">
+                                    <p class="patient-name">Rahul Singh</p>
+                                    <span class="appointment-type">Initial Assessment</span>
+                                </div>
+                                <button class="btn-small secondary">Pending</button>
+                            </div>
+                            <div class="schedule-item">
+                                <div class="schedule-time">02:00 PM</div>
+                                <div class="schedule-content">
+                                    <p class="patient-name">Anjali Gupta</p>
+                                    <span class="appointment-type">Progress Review</span>
+                                </div>
+                                <button class="btn-small secondary">Scheduled</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Recent Patient Queries</h3>
+                        <div class="query-list">
+                            <div class="query-item">
+                                <div class="query-content">
+                                    <p class="query-patient">Priya Patel</p>
+                                    <p class="query-text">Should I continue the herbal medicine during travel?</p>
+                                    <span class="query-time">2 hours ago</span>
+                                </div>
+                                <button class="btn-small primary">Reply</button>
+                            </div>
+                            <div class="query-item">
+                                <div class="query-content">
+                                    <p class="query-patient">Rahul Singh</p>
+                                    <p class="query-text">Experiencing mild headache after yoga session</p>
+                                    <span class="query-time">5 hours ago</span>
+                                </div>
+                                <button class="btn-small primary">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Patient Progress Overview</h3>
+                    <div class="progress-overview">
+                        <div class="progress-item">
+                            <span class="progress-label">Excellent Progress</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill excellent" style="width: 65%"></div>
+                            </div>
+                            <span class="progress-count">65% (102 patients)</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Good Progress</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill good" style="width: 25%"></div>
+                            </div>
+                            <span class="progress-count">25% (39 patients)</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Needs Attention</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill attention" style="width: 10%"></div>
+                            </div>
+                            <span class="progress-count">10% (15 patients)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments" class="content-section">
+                <div class="section-header">
+                    <h2>Appointment Management</h2>
+                    <div class="header-actions">
+                        <select class="filter-select">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                        <button class="btn primary" id="scheduleAppointmentBtn">Schedule New</button>
+                    </div>
+                </div>
+                
+                <div class="appointments-grid">
+                    <div class="appointment-card">
+                        <div class="appointment-header">
+                            <div class="appointment-time">
+                                <span class="time">09:00 AM</span>
+                                <span class="date">Today</span>
+                            </div>
+                            <span class="appointment-status confirmed">Confirmed</span>
+                        </div>
+                        <div class="appointment-patient">
+                            <img src="/placeholder.svg?height=50&width=50" alt="Patient">
+                            <div class="patient-info">
+                                <h4>Priya Patel</h4>
+                                <p>Age: 32 | Treatment: Stress Relief</p>
+                                <p>Phone: +91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="btn-small primary">Start Consultation</button>
+                            <button class="btn-small secondary">Reschedule</button>
+                            <button class="btn-small danger">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="appointment-card">
+                        <div class="appointment-header">
+                            <div class="appointment-time">
+                                <span class="time">10:30 AM</span>
+                                <span class="date">Today</span>
+                            </div>
+                            <span class="appointment-status pending">Pending</span>
+                        </div>
+                        <div class="appointment-patient">
+                            <img src="/placeholder.svg?height=50&width=50" alt="Patient">
+                            <div class="patient-info">
+                                <h4>Rahul Singh</h4>
+                                <p>Age: 45 | Treatment: Panchakarma</p>
+                                <p>Phone: +91 87654 32109</p>
+                            </div>
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="btn-small primary">Confirm</button>
+                            <button class="btn-small secondary">Reschedule</button>
+                            <button class="btn-small danger">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Section -->
+            <section id="patients" class="content-section">
+                <div class="section-header">
+                    <h2>My Patients</h2>
+                    <div class="header-actions">
+                        <input type="search" placeholder="Search patients..." class="search-input">
+                        <select class="filter-select">
+                            <option value="">All Treatments</option>
+                            <option value="stress">Stress Relief</option>
+                            <option value="panchakarma">Panchakarma</option>
+                            <option value="detox">Detox Therapy</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="patients-grid">
+                    <div class="patient-card">
+                        <div class="patient-header">
+                            <img src="/placeholder.svg?height=60&width=60" alt="Patient" class="patient-avatar">
+                            <div class="patient-basic">
+                                <h4>Priya Patel</h4>
+                                <p>Age: 32 | Female</p>
+                                <span class="treatment-badge stress">Stress Relief Therapy</span>
+                            </div>
+                            <div class="patient-status">
+                                <span class="status-indicator active">Active</span>
+                            </div>
+                        </div>
+                        <div class="patient-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Last Visit:</span>
+                                <span class="detail-value">Jan 15, 2024</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Progress:</span>
+                                <div class="progress-bar-small">
+                                    <div class="progress-fill-small" style="width: 75%"></div>
+                                </div>
+                                <span class="detail-value">75%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Next Appointment:</span>
+                                <span class="detail-value">Jan 22, 2024</span>
+                            </div>
+                        </div>
+                        <div class="patient-actions">
+                            <button class="btn-small primary">View Details</button>
+                            <button class="btn-small secondary">Send Message</button>
+                            <button class="btn-small secondary">Schedule</button>
+                        </div>
+                    </div>
+
+                    <div class="patient-card">
+                        <div class="patient-header">
+                            <img src="/placeholder.svg?height=60&width=60" alt="Patient" class="patient-avatar">
+                            <div class="patient-basic">
+                                <h4>Rahul Singh</h4>
+                                <p>Age: 45 | Male</p>
+                                <span class="treatment-badge panchakarma">Panchakarma</span>
+                            </div>
+                            <div class="patient-status">
+                                <span class="status-indicator active">Active</span>
+                            </div>
+                        </div>
+                        <div class="patient-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Last Visit:</span>
+                                <span class="detail-value">Jan 12, 2024</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Progress:</span>
+                                <div class="progress-bar-small">
+                                    <div class="progress-fill-small" style="width: 60%"></div>
+                                </div>
+                                <span class="detail-value">60%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Next Appointment:</span>
+                                <span class="detail-value">Jan 20, 2024</span>
+                            </div>
+                        </div>
+                        <div class="patient-actions">
+                            <button class="btn-small primary">View Details</button>
+                            <button class="btn-small secondary">Send Message</button>
+                            <button class="btn-small secondary">Schedule</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!-- Video Meetings Section -->
+<section id="meetings" style="padding:30px; background:#f9f9fb; font-family:Arial, sans-serif; border-radius:12px; max-width:900px; margin:30px auto; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+    
+    <!-- Header -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h2 style="margin:0; font-size:24px; color:#333;">🎥 Video Consultations</h2>
+        <button id="startMeetingBtn" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:8px; cursor:pointer; font-size:14px; transition:0.3s;">➕ Start New Meeting</button>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:25px;">
+        
+        <!-- Ongoing Meeting Card -->
+        <div style="background:white; border-radius:12px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-left:6px solid #4CAF50;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h4 style="margin:0; font-size:18px; color:#444;">Ongoing Consultation</h4>
+                <span style="background:#e53935; color:white; padding:5px 12px; border-radius:20px; font-size:12px; font-weight:bold;">🔴 Live</span>
+            </div>
+            
+            <div style="display:flex; align-items:center; gap:20px;">
+               <img src="https://cdn2.iconfinder.com/data/icons/colored-simple-circle-volume-01/128/circle-flat-general-51851bd79-1024.png" 
+             alt="Patient Logo" 
+             style="width:80px; height:80px; border-radius:50%; border:3px solid #ddd; object-fit:cover;">
+           <div>
+                    <h5 style="margin:0; font-size:16px; color:#222;">Priya Patel</h5>
+                    <p style="margin:4px 0; font-size:14px; color:#666;">Stress Relief Consultation</p>
+                    <span style="font-size:13px; color:#888;">⏱️ Duration: <b id="meetingDuration">15:32</b></span>
+                </div>
+            </div>
+
+            <!-- Meeting Controls -->
+            <div style="margin-top:15px; display:flex; gap:12px;">
+                <button onclick="toggleMute()" id="muteBtn" style="flex:1; padding:10px; background:#f0f0f0; border:none; border-radius:8px; cursor:pointer; font-size:16px;">🎤 Mute</button>
+                <button onclick="toggleVideo()" id="videoBtn" style="flex:1; padding:10px; background:#f0f0f0; border:none; border-radius:8px; cursor:pointer; font-size:16px;">📹 Video</button>
+                <button onclick="shareScreen()" style="flex:1; padding:10px; background:#f0f0f0; border:none; border-radius:8px; cursor:pointer; font-size:16px;">🖥️ Share</button>
+                <button onclick="endMeeting()" style="flex:1; padding:10px; background:#e53935; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px;">📞 End</button>
+            </div>
+        </div>
+
+        <!-- Scheduled Meetings -->
+        <div style="background:white; border-radius:12px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <h4 style="margin:0 0 15px 0; font-size:18px; color:#444;">📅 Scheduled Video Consultations</h4>
+            
+            <div style="display:flex; flex-direction:column; gap:15px;">
+                
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:8px; background:#f7f7f7; transition:0.3s; cursor:pointer;">
+                    <div style="display:flex; gap:15px; align-items:center;">
+                        <div>
+                            <span style="display:block; font-weight:bold; color:#333;">02:00 PM</span>
+                            <span style="font-size:13px; color:#777;">Today</span>
+                        </div>
+                        <div>
+                            <h5 style="margin:0; font-size:15px; color:#222;">Anjali Gupta</h5>
+                            <p style="margin:2px 0; font-size:13px; color:#555;">Progress Review Session</p>
+                        </div>
+                    </div>
+                    <button onclick="joinMeeting('Anjali Gupta')" style="padding:6px 14px; background:#4CAF50; color:white; border:none; border-radius:6px; cursor:pointer;">Join</button>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:8px; background:#f7f7f7; transition:0.3s; cursor:pointer;">
+                    <div style="display:flex; gap:15px; align-items:center;">
+                        <div>
+                            <span style="display:block; font-weight:bold; color:#333;">04:30 PM</span>
+                            <span style="font-size:13px; color:#777;">Today</span>
+                        </div>
+                        <div>
+                            <h5 style="margin:0; font-size:15px; color:#222;">Vikram Sharma</h5>
+                            <p style="margin:2px 0; font-size:13px; color:#555;">Initial Consultation</p>
+                        </div>
+                    </div>
+                    <button disabled style="padding:6px 14px; background:#bbb; color:white; border:none; border-radius:6px;">Scheduled</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Consultations Section -->
+<section id="consultations" style="padding:30px; background:#f9f9fb; font-family:Arial, sans-serif; border-radius:12px; max-width:900px; margin:30px auto; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center; margin-bottom:20px;">Book a Consultation</h2>
+
+  <!-- SheetDB Form Embed -->
+  <script src="https://sheetdb.io/s/f/yo5xwaxcy4zz2.js"></script>
+</section>
+<script>
+    let isMuted = false;
+    let isVideoOn = true;
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        document.getElementById("muteBtn").innerText = isMuted ? "🔇 Unmute" : "🎤 Mute";
+        alert(isMuted ? "You are muted" : "Microphone unmuted");
+    }
+
+    function toggleVideo() {
+        isVideoOn = !isVideoOn;
+        document.getElementById("videoBtn").innerText = isVideoOn ? "📹 Video" : "🚫 Video Off";
+        alert(isVideoOn ? "Camera turned on" : "Camera turned off");
+    }
+
+    function shareScreen() {
+        alert("Screen sharing started!");
+    }
+
+    function endMeeting() {
+        alert("Meeting ended.");
+        window.location.reload();
+    }
+
+    function joinMeeting(name) {
+        alert("Joining meeting with " + name);
+    }
+
+    document.getElementById("startMeetingBtn").addEventListener("click", () => {
+        alert("Starting a new meeting...");
+    });
+</script>
+
+
+            <!-- Patient Progress Section -->
+            <section id="progress" class="content-section">
+                <div class="section-header">
+                    <h2>Patient Progress Tracking</h2>
+                    <select class="filter-select">
+                        <option value="all">All Patients</option>
+                        <option value="excellent">Excellent Progress</option>
+                        <option value="good">Good Progress</option>
+                        <option value="attention">Needs Attention</option>
+                    </select>
+                </div>
+                
+                <div class="progress-cards">
+                    <div class="progress-card">
+                        <div class="progress-header">
+                            <div class="patient-info">
+                                <img src="/placeholder.svg?height=50&width=50" alt="Patient">
+                                <div>
+                                    <h4>Priya Patel</h4>
+                                    <p>Stress Relief Therapy</p>
+                                </div>
+                            </div>
+                            <span class="progress-status excellent">Excellent</span>
+                        </div>
+                        <div class="progress-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Overall Progress</span>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="metric-value">85%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Treatment Adherence</span>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 92%"></div>
+                                </div>
+                                <span class="metric-value">92%</span>
+                            </div>
+                        </div>
+                        <div class="progress-actions">
+                            <button class="btn-small primary">View Details</button>
+                            <button class="btn-small secondary">Add Note</button>
+                        </div>
+                    </div>
+
+                    <div class="progress-card">
+                        <div class="progress-header">
+                            <div class="patient-info">
+                                <img src="/placeholder.svg?height=50&width=50" alt="Patient">
+                                <div>
+                                    <h4>Rahul Singh</h4>
+                                    <p>Panchakarma Treatment</p>
+                                </div>
+                            </div>
+                            <span class="progress-status good">Good</span>
+                        </div>
+                        <div class="progress-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Overall Progress</span>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 68%"></div>
+                                </div>
+                                <span class="metric-value">68%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Treatment Adherence</span>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 78%"></div>
+                                </div>
+                                <span class="metric-value">78%</span>
+                            </div>
+                        </div>
+                        <div class="progress-actions">
+                            <button class="btn-small primary">View Details</button>
+                            <button class="btn-small secondary">Add Note</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+          <!-- Profile Section -->
+<section id="profile" class="content-section" style="padding: 2rem;">
+  <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <h2 style="font-size: 1.8rem; color: #333;">My Profile</h2>
+    <button class="btn primary" id="editProfileBtn" style="padding: 0.5rem 1rem; background-color: #4CAF50; color: #fff; border: none; border-radius: 6px; cursor: pointer;">Edit Profile</button>
+  </div>
+
+  <div class="profile-container" style="display: flex; justify-content: center;">
+    <div class="profile-card" style="width: 100%; max-width: 900px; background-color: #fff; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+      
+      <div class="profile-header" style="display: flex; align-items: center; gap: 2rem;">
+       <img src="https://png.pngtree.com/png-vector/20190411/ourlarge/pngtree-vector-doctor-icon-png-image_925913.jpg" 
+     alt="Doctor" 
+     class="profile-avatar" 
+     style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid #4CAF50; object-fit: cover;">
+  <div class="profile-info">
+          <h3 id="doctorName" style="font-size: 1.8rem; margin-bottom: 0.3rem;">Loading...</h3>
+          <p class="profile-title" id="doctorSpecialization" style="font-size: 1rem; color: #666; margin-bottom: 0.3rem;">Specialization</p>
+          <div class="specialization-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;"></div>
+          <p class="profile-experience" id="doctorExperience" style="font-size: 0.95rem; color: #888; margin-bottom: 0.5rem;">Experience</p>
+          <div class="profile-rating" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; color: #444;">
+            <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+            <span class="rating-text">4.8 (89 reviews)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-details" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="detail-section">
+          <h4 style="font-size: 1.2rem; color: #333; margin-bottom: 0.8rem;">Contact Information</h4>
+          <div class="detail-grid" style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div class="detail-item" style="flex: 1;">
+              <span class="detail-label" style="color: #666;">Email:</span>
+              <span class="detail-value" id="doctorEmail" style="margin-left: 0.3rem; color: #333;">loading...</span>
+            </div>
+            <div class="detail-item" style="flex: 1;">
+              <span class="detail-label" style="color: #666;">Phone:</span>
+              <span class="detail-value" id="doctorPhone" style="margin-left: 0.3rem; color: #333;">loading...</span>
+            </div>
+            <div class="detail-item" style="flex: 1;">
+              <span class="detail-label" style="color: #666;">Qualification:</span>
+              <span class="detail-value" id="doctorQualification" style="margin-left: 0.3rem; color: #333;">loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4 style="font-size: 1.2rem; color: #333; margin-bottom: 0.8rem;">Statistics</h4>
+          <div class="stats-row" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+            <div class="stat-item" style="flex: 1; background-color: #f5f5f5; padding: 1rem; border-radius: 8px; text-align: center;">
+              <span class="stat-number" style="font-size: 1.5rem; font-weight: bold;">156</span>
+              <span class="stat-label" style="display: block; color: #666;">Total Patients</span>
+            </div>
+            <div class="stat-item" style="flex: 1; background-color: #f5f5f5; padding: 1rem; border-radius: 8px; text-align: center;">
+              <span class="stat-number" style="font-size: 1.5rem; font-weight: bold;">1,247</span>
+              <span class="stat-label" style="display: block; color: #666;">Consultations</span>
+            </div>
+            <div class="stat-item" style="flex: 1; background-color: #f5f5f5; padding: 1rem; border-radius: 8px; text-align: center;">
+              <span class="stat-number" style="font-size: 1.5rem; font-weight: bold;">94%</span>
+              <span class="stat-label" style="display: block; color: #666;">Success Rate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        </main>
+    </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ---------------- LOGOUT ----------------
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                const res = await fetch("http://127.0.0.1:5000/logout", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    credentials: "same-origin"
+                });
+                if (res.ok) {
+                    localStorage.removeItem("token");
+                    window.location.href = "/login-page";
+                } else {
+                    alert("Logout failed");
+                }
+            } catch (err) {
+                alert("⚠️ Backend not reachable");
+            }
+        });
+    }
+
+    // ---------------- SIDEBAR NAV ----------------
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    function activateSection(sectionId) {
+        sections.forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(sectionId);
+        if (target) target.classList.add('active');
+
+        links.forEach(l => l.parentElement.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+        if (activeLink) activeLink.parentElement.classList.add('active');
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const sectionId = link.dataset.section;
+            activateSection(sectionId);
+            history.pushState({ section: sectionId }, '', window.location.pathname);
+        });
+    });
+
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.section) {
+            activateSection(event.state.section);
+        }
+    });
+
+    // ---------------- PROFILE LOAD ----------------
+    async function loadDoctorProfile() {
+        try {
+            const res = await fetch("http://127.0.0.1:5000/api/doctor-profile");
+            if (!res.ok) throw new Error("Failed to fetch doctor profile");
+
+            const doc = await res.json();
+
+            document.getElementById("doctorName").textContent = doc.fullName || "N/A";
+            document.getElementById("doctorSpecialization").textContent = doc.specialization || "N/A";
+            document.getElementById("doctorEmail").textContent = doc.email || "N/A";
+            document.getElementById("doctorPhone").textContent = doc.phone || "N/A";
+            document.getElementById("doctorQualification").textContent = doc.qualification || "N/A";
+
+            // Static stats
+            document.getElementById("doctorExperience").textContent = "15+ Years Experience";
+            document.querySelector(".rating-stars").textContent = "⭐⭐⭐⭐⭐";
+            document.querySelector(".rating-text").textContent = "4.8 (89 reviews)";
+
+            // Tags
+            const specContainer = document.querySelector(".specialization-tags");
+            specContainer.innerHTML = "";
+            if (doc.specialization) {
+                doc.specialization.split(",").forEach(spec => {
+                    const span = document.createElement("span");
+                    span.classList.add("tag");
+                    span.textContent = spec.trim();
+                    specContainer.appendChild(span);
+                });
+            }
+        } catch (err) {
+            console.error("⚠️ Could not load doctor profile:", err);
+        }
+    }
+
+    // Init
+    activateSection('dashboard');
+    loadDoctorProfile();
+});
+</script>
+</body>
+</html>
