@@ -16,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # -------------------- GEMINI + RULES --------------------
 
 #GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")
-GEMINI_API_KEY = "AIzaSyBKOQUn7L95AjA5YE4S_4ee5CkXEKTBVEE"
+GEMINI_API_KEY = your_new_api_key_here
 
 genai.configure(api_key=GEMINI_API_KEY)
 
